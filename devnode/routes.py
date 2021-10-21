@@ -155,3 +155,14 @@ def send_reset_email(user):
     If you did not make this request then simply ignore this email.
     '''
     mail.send(msg)
+
+
+@login_required
+@app.route('/userProfile')
+def user_profile():
+    return render_template('userProfile.html')
+
+
+@app.route('/profiles')
+def profiles():
+    return render_template('profileSection.html')

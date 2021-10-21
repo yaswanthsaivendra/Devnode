@@ -15,10 +15,10 @@
     {% endif %}
 
     <!-- CSS only -->
+    {% block css %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    {% block css %}
     {% endblock css %}
 </head>
 
@@ -37,9 +37,10 @@
                 <i class="fa fa-times" id="close"></i>
                 <ul>
                     <li><a href="#">Feed</a></li>
-                    <li><a href="#">Profiles</a></li>
+                    <li><a href="{{url_for('profiles')}}">Profiles</a></li>
                     {% if current_user.is_authenticated %}
                     <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    <li><a href="{{url_for('user_profile')}}"><i class="fas fa-user" id="user"></i></a></li>
                     {% else %}
                     <li><a href="{{ url_for('login') }}">Login</a></li>
                     <a href="{{ url_for('signup') }}" class="btn btn-outline-light signupTop">Signup</a>
