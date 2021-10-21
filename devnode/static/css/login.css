@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@500&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Baloo Tamma 2", sans-serif;
+
+}
+body {
+  background-color: rgba(177, 174, 174, 0.17) !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+#close{
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  font-size:40px;
+  color:#4a5150c2 !important;
+}
+#close:hover{
+  text-decoration: none !important;
+}
+.logo{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color:#4a5150c2 !important;
+}
+.logo:hover{
+  text-decoration: none !important;
+}
+
+
+.formContainer {
+  background-color: #ffffff;
+  width: 350px;
+  height: 500px;
+  padding: 20px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.17);
+  border-radius: 8px;
+}
+h1 {
+  color: #6daea6;
+}
+h3 {
+  font-size: x-small;
+  color: #4a5150;
+}
+.gbtn{
+    box-shadow: 1px 2px 7px 0px rgba(0, 0, 0, 0.129);
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding: 10px !important;
+
+}
+.googleLogo{
+    width: 20px;
+}
+.gtext{
+ color: #4a5150;
+}
+
+.inputBox{
+    background-color: #ECECEC;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content:space-evenly;
+    border-radius: 5px;
+    margin:10px 0;
+}
+.emailBox{
+  margin-top: 40px !important;
+}
+
+input {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding-left:20px;
+    color: #4a5150;
+
+}
+
+.small{
+  float: right;
+  color:#6daea6 ;
+  cursor: pointer;
+  margin: auto;
+}
+.lbtn{
+  margin-top: 10px !important;
+  color: white !important;
+  background-color: #6daea6 !important;
+  padding: 10px !important;
+  font-weight: 500 !important;
+}
+.downLink{
+  font-size:15px;
+  color: #4a5150;
+}
+a{
+  text-decoration: none !important;
+  color: #6daea6 !important;
+  padding-left:10px ;
+}
+a:hover{
+  text-decoration: underline !important;
+}
+.fa{
+  color:#4a5150;
+}

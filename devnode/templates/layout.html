@@ -1,0 +1,86 @@
+ <!-- layout.html is like layout of our html pages, it will be applicable to all mulitple html pages. So that we wont repeat the some html code again nd again. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% if title %}
+    <title>Devnode - {{ title }} </title>
+    {% else %}
+    <title>Devnode</title>
+    {% endif %}
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% block css %}
+    {% endblock css %}
+</head>
+
+<body>
+    {% block navigation %}
+    <!-- navbar -->
+    <header>
+        <nav>
+            <div class="logo">
+                <h3 class="logoName">Devnode</h3>
+                <!-- <img src="{{ url_for('static', filename='assets/Devnode.png') }}" alt="" class="logoImg"> -->
+
+            </div>
+            <i class="fa fa-bars" id="open"></i>
+            <div class="menu" id="menuList">
+                <i class="fa fa-times" id="close"></i>
+                <ul>
+                    <li><a href="#">Feed</a></li>
+                    <li><a href="#">Profiles</a></li>
+                    {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    <a href="{{ url_for('signup') }}" class="btn btn-outline-light signupTop">Signup</a>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- navbar close -->
+    {% endblock navigation %}
+
+    <!-- flash messages start -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="container">
+                <div class="row">
+                    <div class="alert alert-{{category}} col-md-8 alert" role="alert">
+                        {{ message }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <!-- flash messages end -->
+
+
+
+
+    {% block content %}
+    {% endblock content %}
+
+
+
+
+
+
+    <!-- javascript here -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ"
+    crossorigin="anonymous"></script>
+</body>
+</html>

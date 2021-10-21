@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Baloo Tamma 2', cursive;
+}
+.searchBox{
+    margin-top: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.searchBox form{
+    display: flex;
+}
+.searchBox .form-control:focus{
+    box-shadow: none;
+}
+.btn:focus{
+    box-shadow: none !important;
+}
+.profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap;
+    margin: 2em;
+  }
+  .profile-card {
+    margin: 10px;
+    min-width: 300px;
+    max-width: 100%;
+    color: #2B2B2B;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+  .profile-card .profile-image {
+    padding: 5% 10% 0;
+    background-color: #2B2B2B;
+  }
+  
+  .profile-card .profile-image img {
+    width:120px;
+    height:120px;
+    position: relative;
+    top: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  
+  }
+  
+  .profile-card figcaption {
+    padding: 5% 10% 15%;
+    margin-top: 60px;
+  }
+  
+  .profile-card h3 {
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 20px;
+    margin: 10px 0;
+  }
+  
+  .profile-card h5 {
+    font-weight: 400;
+    margin: 10px;
+    text-transform: uppercase;
+    color: #888;
+  }

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile</title>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/userProfile.css">
+    <link rel="stylesheet" href="../static/css/nav.css">
+</head>
+
+<body>
+    <div id="nav">
+        <nav>
+            <div class="logo">
+                <h3 class="logoName">Devnode</h3>
+            </div>
+            <i class="fa fa-bars" id="open"></i>
+            <div class="menu" id="menuList">
+                <i class="fa fa-times" id="close"></i>
+                <ul>
+                    <li><a href="#">Feed</a></li>
+                    <li><a href="#">Profiles</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    <li><i class="fas fa-user" id="user"></i></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="wrapper">
+        <div class="left">
+            <div class="coverPic"></div>
+            <div class="profilePicWrapper">
+                <div class="profilePic">
+                    <img src="https://thumbs.dreamstime.com/b/young-woman-avatar-cartoon-character-profile-picture-young-brunette-woman-short-hair-avatar-cartoon-character-vector-149728784.jpg"
+                        alt="" srcset="">
+                </div>
+                <div class="nameBox">
+                    <h3>Neha Deekonda</h3>
+                    <p>Web Developer</p>
+                </div>
+            </div>
+            <div class="mainBox">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link " href="#details" id="detailsLink">Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#activity" id="activityLink">Activity</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#settngs" id="settingsLink">Settings</a>
+                    </li>
+                </ul>
+                <div class="mainBoxTabs">
+                    <div class="details">
+                        <div class="about my-3">
+                            <h4 class="m-2">About</h4>
+                            <p class="m-2">Lorem ipsum dolor sit amet con
+                                sectetur adipisicing elit. Voluptatibus, eius sapiente</p>
+                        </div>
+                        <div class="skills">
+                            <div class="skillsHeader">
+                                <h4 class="m-2">Skills</h4>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  class="btn btn-light">Add Skills</button>
+                            </div>
+                            <div class="skillsBox my-3">
+                                <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
+                                <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
+                                <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
+                                <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
+                                <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="activity">
+                    </div>
+                    <div class="settings">
+                        <form class="m-3 w-75">
+                            <div class="form-group my-3">
+                                <label for="Username">Username</label>
+                                <input type="text" class="form-control" id="Username" placeholder="Enter username">
+                            </div>
+                            <div class="form-group my-3">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" placeholder="Enter email">
+                            </div>
+                            <div class="form-group my-3">
+                                <label for="about">About</label>
+                                <textarea class="form-control" id="about" rows="2"
+                                    placeholder="write your bio here.."></textarea>
+                            </div>
+                            <div class="form-group my-3">
+                                <label for="designation">Designation</label>
+                                <input type="text" class="form-control" id="designation">
+                            </div>
+                            <div class="form-group my-3">
+                                <label class="my-1 mr-2" for="branch">Branch</label>
+                                <select class="custom-select my-1 mr-sm-2" id="branch">
+                                    <option selected>Choose...</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="form-group my-3">
+                                <label class="my-1 mr-2" for="year">Year</label>
+                                <select class="custom-select my-1 mr-sm-2" id="year">
+                                    <option selected>Choose...</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="form-group my-3">
+                                <label for="lid">Linkedin Id</label>
+                                <input type="text" class="form-control" id="lid">
+                            </div>
+                            <div class="form-group my-3">
+                                <label for="gid">Github Id</label>
+                                <input type="text" class="form-control" id="gid">
+                            </div>
+                            <div class="form-group my-3">
+                                <label for="tid">Twitter Id</label>
+                                <input type="text" class="form-control" id="tid">
+                            </div>
+                            <button type="submit" class="btn btn-primary saveBtn">Save</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="info p-3">
+                <h4>Info</h4>
+                <hr>
+                <strong>Username :</strong><span>adhfoia</span>
+                <hr>
+                <strong>Branch :</strong><span>adhfoia</span>
+                <hr>
+                <strong>Batch :</strong><span>2024</span>
+            </div>
+            <div class="contacts p-3">
+                <h4>Contacts</h4>
+                <hr>
+                <div class="contactlinks">
+                    <a href="http://"><button class="btn btn-dark my-2 mail"><i
+                                class="far fa-envelope"></i>Gmail</button></a>
+                    <a href="http://"><button class="btn btn-dark  my-2 discord"><i
+                                class="fab fa-discord"></i>Discord</button></a>
+                    <a href="http://"><button class="btn btn-dark  my-2 linkedin"><i
+                                class="fab fa-linkedin"></i>Linkedin</button></a>
+                    <a href="http://"><button class="btn btn-dark  my-2 twitter"><i
+                                class="fab fa-twitter"></i>Twitter</button></a>
+                </div>
+
+
+
+            </div>
+        </div>
+        <!-- modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Add new skill:</label>
+                                <textarea class="form-control" id="message-text"></textarea>
+                            </div>
+
+                        </form>
+                        <div class="skillsBox my-3">
+                            <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
+                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-trash" viewBox="0 0 16 16">
+                                <path
+                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                <path fill-rule="evenodd"
+                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                            </svg>
+                            <br>
+                            <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
+                            <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
+                            <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
+                            <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script>
+    const detailsLink = document.getElementById("detailsLink");
+    const activityLink = document.getElementById("activityLink");
+    const settingsLink = document.getElementById("settingsLink");
+    const details = document.querySelector(".details");
+    const activity = document.querySelector(".activity");
+    const settings = document.querySelector(".settings");
+    detailsLink.addEventListener("click", () => {
+        details.style.display = "flex";
+        activity.style.display = "none";
+        settings.style.display = "none";
+    })
+    activityLink.addEventListener("click", () => {
+        details.style.display = "none";
+        activity.style.display = "flex";
+        settings.style.display = "none";
+    });
+    settingsLink.addEventListener("click", () => {
+        details.style.display = "none";
+        activity.style.display = "none";
+        settings.style.display = "flex";
+    })
+</script>
+
+</html>

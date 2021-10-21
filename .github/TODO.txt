@@ -1,0 +1,2 @@
+html files should be added into templates folder.
+css/js files should be added into static folder.

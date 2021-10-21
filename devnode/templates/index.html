@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/index.css') }}">
+{% endblock css %}
+
+{% block content %}
+<div class="containerMain">
+    <div class="headingBox">
+        <h1 class="mainHeading">Find Developers and Collaborate!</h1>
+        <a href="{{ url_for('signup') }}" class="btn btn-light shinybtn">Sign up</a>
+    </div>
+    <div class="imgBox">
+        <img src="{{ url_for('static', filename= 'assets/illustration.jpg') }}" class="ilimg img-fluid" alt="illustration" srcset="">
+    </div>
+</div>
+
+
+
+
+
+
+<!-- js for index page here -->
+<script src="{{ url_for('static', filename='javascript/index.js' ) }}"></script>
+{% endblock content %}
