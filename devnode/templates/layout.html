@@ -14,6 +14,12 @@
     <title>Devnode</title>
     {% endif %}
 
+    <!-- footer part css and js  -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/footer.css')}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+
     <!-- CSS only -->
     {% block css %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -77,6 +83,67 @@
 
 
 
+
+
+    {% block footer %}
+    <footer class="footer-distributed">
+		<div class="footer-left">
+			<span>
+				<h1 style="color:  #ffffff;">Devnode</h1>
+			</span>
+			<p class="footer-links">
+				<a href="#">Home</a>
+				·
+				<a href="#">Feed</a>
+				·
+				<a href="#">About</a>
+				·
+				<a href="#">Faq</a>
+				·
+				<a href="#">Contact</a>
+			</p>
+			<p class="footer-company-name">Devnode &copy; 2021</p>
+		</div>
+		<div class="footer-center">
+			<div>
+				<i class="fa fa-map-marker"></i>
+				<p><span>MAIN ROAd, Madhurawada</span> Visakhapatnam, INDIA</p>
+			</div>
+			<div>
+				<i class="fa fa-phone"></i>
+				<p>+91 555 123456</p>
+			</div>
+			<div>
+				<i class="fa fa-envelope"></i>
+				<p><a href="#"><span>contact.devnode@gmail.com</span></a></p>
+			</div>
+		</div>
+		<div class="footer-right">
+			<p class="footer-company-about">
+				<span>About the company</span>
+				Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus
+				vehicula sit amet.
+			</p>
+			<div class="footer-icons">
+				<a href="#" class="social-icon">
+					<i class="fab fa-facebook-f"></i>
+				</a>
+				<a href="#" class="social-icon">
+					<i class="fab fa-twitter"></i>
+				</a>
+				<a href="#" class="social-icon">
+					<i class="fab fa-google"></i>
+				</a>
+				<a href="#" class="social-icon">
+					<i class="fab fa-linkedin-in"></i>
+				</a>
+				<a href="#" class="social-icon">
+					<i class="fab fa-instagram"></i>
+				</a>
+			</div>
+		</div>
+	</footer>
+    {% endblock footer %}
 
 
     <!-- javascript here -->
