@@ -20,8 +20,13 @@
             <ul>
                 <li><a href="#">Feed</a></li>
                 <li><a href="{{url_for('profiles')}}">Profiles</a></li>
+                {% if current_user.is_authenticated %}
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
                 <li><a href="{{url_for('user_profile')}}"><i class="fas fa-user" id="user"></i></a></li>
+                {% else %}
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <a href="{{ url_for('signup') }}" class="btn btn-outline-light signupTop">Signup</a>
+                {% endif %}
             </ul>
         </div>
     </nav>

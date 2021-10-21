@@ -16,6 +16,11 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
+    about = db.Column(db.Text, nullable=False, default='Devnode Member')
+    designation = db.Column(db.String(100), nullable=False, default='Devnode Member')
+    branch = db.Column(db.String(100))
+    year = db.Column(db.Integer)
+
 
     def get_token(self, expires_sec=1800):
         s = Serializer(app.config['SECRET_KEY'], expires_sec)
