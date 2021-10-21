@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms.fields.core import StringField
-from wtforms.fields.simple import PasswordField, SubmitField
+from wtforms.fields.core import SelectField, StringField
+from wtforms.fields.simple import PasswordField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationError
 from devnode.models import User
-
+from flask_login import current_user
 
 
 
@@ -44,3 +44,30 @@ class ResetPasswordForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired(), Length(min=8)])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Reset Password')
+
+
+
+class UpdateAccountForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=3,max=20)])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    about = TextAreaField('About',validators=[DataRequired()])
+    designation = StringField('Designation', validators=[DataRequired()])
+    branch = SelectField('Branch', choices=[None,'CSE','EE','ECE','MSC','ME','CE','M.TECH'])
+    year = SelectField('Year', choices=[None,2021,2022,2023,2024,2025,2026,2027,2028])
+    twitter_id = StringField('Twitter Id')
+    github_id = StringField('Github Id')
+    linkedin_id = StringField('Linkedin Id')
+    discord_id = StringField('Discord Id')
+    submit = SubmitField('Save')
+
+    def validate_username(self, username):
+        if username.data != current_user.username:
+            user = User.query.filter_by(username=username.data).first()
+            if user:
+                raise ValidationError('That username is already taken. Please choose a different one')
+
+    def validate_email(self, email):
+        if email.data != current_user.email:
+            user = User.query.filter_by(email=email.data).first()
+            if user:
+                raise ValidationError('The email is already registered')

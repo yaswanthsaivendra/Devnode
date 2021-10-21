@@ -1,3 +1,4 @@
+from enum import unique
 from devnode import db, app
 from flask_login import UserMixin
 from devnode import login_manager
@@ -18,8 +19,12 @@ class User(db.Model, UserMixin):
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     about = db.Column(db.Text, nullable=False, default='Devnode Member')
     designation = db.Column(db.String(100), nullable=False, default='Devnode Member')
-    branch = db.Column(db.String(100))
-    year = db.Column(db.Integer)
+    branch = db.Column(db.String(100), default=None)
+    year = db.Column(db.Integer,default=None)
+    discord_id = db.Column(db.String(120), unique=True)
+    twitter_id = db.Column(db.String(120), unique=True)
+    github_id = db.Column(db.String(120), unique=True)
+    linkedin_id = db.Column(db.String(120), unique=True)
 
 
     def get_token(self, expires_sec=1800):

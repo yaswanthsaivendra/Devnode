@@ -2,7 +2,7 @@ from flask import render_template, url_for, redirect, request
 from flask.helpers import flash
 from flask_login.utils import login_user, logout_user
 from devnode import app, bcrypt, db, mail
-from devnode.forms import LoginForm, RequestResetForm, ResetPasswordForm, SignupForm
+from devnode.forms import LoginForm, RequestResetForm, ResetPasswordForm, SignupForm, UpdateAccountForm
 from flask_login import current_user, login_user, login_required
 from devnode.models import User
 from flask_mail import Message
@@ -158,9 +158,40 @@ def send_reset_email(user):
 
 
 @login_required
-@app.route('/userProfile')
+@app.route('/userProfile', methods=['GET', 'POST'])
 def user_profile():
-    return render_template('userProfile.html')
+    if current_user.is_authenticated and not current_user.confirmed:
+        return redirect(url_for('unconfirmed'))
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        current_user.about = form.about.data
+        current_user.designation = form.designation.data
+        current_user.branch = form.branch.data
+        current_user.year = form.year.data
+        current_user.twitter_id = form.twitter_id.data
+        current_user.linkedin_id = form.linkedin_id.data
+        current_user.github_id = form.github_id.data
+        current_user.discord_id = form.discord_id.data
+
+        db.session.commit()
+        flash('Your account has been updated', 'success')
+        return redirect(url_for('user_profile'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+        form.about.data = current_user.about
+        form.designation.data = current_user.designation
+        if current_user.branch !=None:
+            form.branch.data = current_user.branch
+        if current_user.year !=None:
+            form.year.data = current_user.year
+        form.twitter_id.data = current_user.twitter_id
+        form.linkedin_id.data = current_user.linkedin_id
+        form.github_id.data = current_user.github_id
+        form.discord_id.data = current_user.discord_id
+    return render_template('userProfile.html', title='Account', form=form)
 
 
 @app.route('/profiles')

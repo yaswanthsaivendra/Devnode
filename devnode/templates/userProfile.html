@@ -49,8 +49,8 @@
                     alt="" srcset="">
             </div>
             <div class="nameBox">
-                <h3>Neha Deekonda</h3>
-                <p>Web Developer</p>
+                <h3>{{ current_user.username }}</h3>
+                <p>{{ current_user.designation }}</p>
             </div>
         </div>
         <div class="mainBox">
@@ -69,8 +69,7 @@
                 <div class="details">
                     <div class="about my-3">
                         <h4 class="m-2">About</h4>
-                        <p class="m-2">Lorem ipsum dolor sit amet con
-                            sectetur adipisicing elit. Voluptatibus, eius sapiente</p>
+                        <p class="m-2">{{ current_user.about }}</p>
                     </div>
                     <div class="skills">
                         <div class="skillsHeader">
@@ -89,85 +88,185 @@
                 </div>
                 <div class="activity">
                 </div>
-                <div class="settings">
-                    <form class="m-3 w-75">
-                        <div class="form-group my-3">
-                            <label for="Username">Username</label>
-                            <input type="text" class="form-control" id="Username" placeholder="Enter username">
-                        </div>
-                        <div class="form-group my-3">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp" placeholder="Enter email">
-                        </div>
-                        <div class="form-group my-3">
-                            <label for="about">About</label>
-                            <textarea class="form-control" id="about" rows="2"
-                                placeholder="write your bio here.."></textarea>
-                        </div>
-                        <div class="form-group my-3">
-                            <label for="designation">Designation</label>
-                            <input type="text" class="form-control" id="designation">
-                        </div>
-                        <div class="form-group my-3">
-                            <label class="my-1 mr-2" for="branch">Branch</label>
-                            <select class="custom-select my-1 mr-sm-2" id="branch">
-                                <option selected>Choose...</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                        <div class="form-group my-3">
-                            <label class="my-1 mr-2" for="year">Year</label>
-                            <select class="custom-select my-1 mr-sm-2" id="year">
-                                <option selected>Choose...</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                        <div class="form-group my-3">
-                            <label for="lid">Linkedin Id</label>
-                            <input type="text" class="form-control" id="lid">
-                        </div>
-                        <div class="form-group my-3">
-                            <label for="gid">Github Id</label>
-                            <input type="text" class="form-control" id="gid">
-                        </div>
-                        <div class="form-group my-3">
-                            <label for="tid">Twitter Id</label>
-                            <input type="text" class="form-control" id="tid">
-                        </div>
-                        <button type="submit" class="btn btn-primary saveBtn">Save</button>
-                    </form>
-                </div>
 
+                <!-- Settings -->
+                <div class="settings">
+                    <form action="" method="post"  class="m-3 w-75" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+
+                        <div class="form-group my-3">
+                            {{ form.username.label(class="form-control-label") }}
+                            {% if form.username.errors %}
+                            {{ form.username(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.username(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group my-3">
+                            {{ form.email.label(class="form-control-label") }}
+                            {% if form.email.errors %}
+                            {{ form.email(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.email(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group my-3">
+                            {{ form.about.label(class="form-control-label") }}
+                            {% if form.about.errors %}
+                            {{ form.about(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.about.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.about(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group my-3">
+                            {{ form.designation.label(class="form-control-label") }}
+                            {% if form.designation.errors %}
+                            {{ form.designation(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.designation.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.designation(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group my-3">
+                            {{ form.branch.label(class="my-1 mr-2 form-control-label") }}
+                            {% if form.branch.errors %}
+                            {{ form.branch(class="custom-select my-1 mr-sm-2 form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.branch.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.branch(class="custom-select my-1 mr-sm-2 form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group my-3">
+                            {{ form.year.label(class="my-1 mr-2 form-control-label") }}
+                            {% if form.year.errors %}
+                            {{ form.year(class="custom-select my-1 mr-sm-2 form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.year.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.year(class="custom-select my-1 mr-sm-2 form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group my-3">
+                            {{ form.twitter_id.label(class="form-control-label") }}
+                            {% if form.twitter_id.errors %}
+                            {{ form.twitter_id(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.twitter_id.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.twitter_id(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group my-3">
+                            {{ form.github_id.label(class="form-control-label") }}
+                            {% if form.github_id.errors %}
+                            {{ form.github_id(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.github_id.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.github_id(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group my-3">
+                            {{ form.linkedin_id.label(class="form-control-label") }}
+                            {% if form.linkedin_id.errors %}
+                            {{ form.linkedin_id(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.linkedin_id.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.linkedin_id(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group my-3">
+                            {{ form.discord_id.label(class="form-control-label") }}
+                            {% if form.discord_id.errors %}
+                            {{ form.discord_id(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.discord_id.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.discord_id(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        {{ form.submit(class="btn btn-primary saveBtn", value="Save") }}
+
+                </div>
             </div>
         </div>
     </div>
+
+
+
+
     <div class="right">
         <div class="info p-3">
             <h4>Info</h4>
             <hr>
-            <strong>Username :</strong><span>adhfoia</span>
+            <strong>Username : </strong><span>{{ current_user.username }}</span>
             <hr>
-            <strong>Branch :</strong><span>adhfoia</span>
+            <strong>Branch : </strong><span>{{ current_user.branch }}</span>
             <hr>
-            <strong>Batch :</strong><span>2024</span>
+            <strong>Batch : </strong><span>{{ current_user.year }}</span>
         </div>
         <div class="contacts p-3">
             <h4>Contacts</h4>
             <hr>
             <div class="contactlinks">
-                <a href="http://"><button class="btn btn-dark my-2 mail"><i
+                <a href="mailto:{{current_user.email}}"  target="blank"><button class="btn btn-dark my-2 mail"><i
                             class="far fa-envelope"></i>Gmail</button></a>
-                <a href="http://"><button class="btn btn-dark  my-2 discord"><i
+                <a href="https://discord.com/{{current_user.discord_id}}"  target="blank"><button class="btn btn-dark  my-2 discord"><i
                             class="fab fa-discord"></i>Discord</button></a>
-                <a href="http://"><button class="btn btn-dark  my-2 linkedin"><i
+                <a href="https://linkedin.com/in/{{current_user.linkedin_id}}"  target="blank"><button class="btn btn-dark  my-2 linkedin"><i
                             class="fab fa-linkedin"></i>Linkedin</button></a>
-                <a href="http://"><button class="btn btn-dark  my-2 twitter"><i
+                <a href="https://twitter.com/{{current_user.twitter_id}}" target="blank"><button class="btn btn-dark  my-2 twitter"><i
                             class="fab fa-twitter"></i>Twitter</button></a>
+                <a href="https://github.com/{{current_user.github_id}}" target="blank"><button class="btn btn-dark  my-2 github"><i
+                    class="fab fa-github"></i>Github</button></a>
             </div>
 
 
