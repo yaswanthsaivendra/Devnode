@@ -88,10 +88,26 @@ body {
 }
 
 .coverPic {
-  /* position: absolute; */
-  min-height: 150px;
+  position: relative;
+  height: 150px;
   background-color:#a1acb6 !important;
   /* background-color: #4a514a !important; */
+}
+.coverPic i{
+  cursor: pointer;
+  position: absolute;
+ color: white;
+ left: 95%;
+ margin-top: 10px;
+ border: 1px solid #f8f9fa;
+ background-color: black;
+ border-radius:50%;
+ padding: 5px;
+}
+.coverPic img{
+  height: 150px;
+  width: 100%;
+  object-fit: cover;
 }
 .profilePicWrapper {
   position: relative;
@@ -105,6 +121,7 @@ body {
   width: 150px;
   height: 150px;
   border-radius: 50%;
+  cursor: pointer;
 }
 .profilePic img {
   height: 100%;
