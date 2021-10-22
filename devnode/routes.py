@@ -62,7 +62,7 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/confirm/<token>', methods=['GET', 'POST'])
+@app.route('/confirm/<token>/', methods=['GET', 'POST'])
 def confirm_email(token):
     if current_user.is_authenticated and current_user.confirmed:
         return redirect(url_for('index'))
@@ -107,7 +107,7 @@ def send_confirmation_email(user):
 
 
 
-@app.route('/unconfirmed')
+@app.route('/unconfirmed/')
 @login_required
 def unconfirmed():
     if current_user.confirmed:
@@ -116,7 +116,7 @@ def unconfirmed():
     return render_template('unconfirmed.html')
 
 
-@app.route('/resend')
+@app.route('/resend/')
 @login_required
 def resend_confirmation_email():
     token = current_user.get_token()
@@ -137,7 +137,7 @@ def resend_confirmation_email():
     return redirect(url_for('unconfirmed'))
 
 
-@app.route('/reset_password', methods=['GET', 'POST'])
+@app.route('/reset_password/', methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated :
         return redirect(url_for('index'))
@@ -150,7 +150,7 @@ def reset_request():
     return render_template('password_reset_request.html', title= 'Reset Password', form=form)
 
 
-@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+@app.route('/reset_password/<token>/', methods=['GET', 'POST'])
 def reset_token(token):
     if current_user.is_authenticated :
         return redirect(url_for('index'))
@@ -197,7 +197,7 @@ def send_reset_email(user):
 
 
 @login_required
-@app.route('/userProfile', methods=['GET', 'POST'])
+@app.route('/userProfile/', methods=['GET', 'POST'])
 def user_profile():
     if current_user.is_authenticated and not current_user.confirmed:
         return redirect(url_for('unconfirmed'))
@@ -233,6 +233,13 @@ def user_profile():
     return render_template('userProfile.html', title='Account', form=form)
 
 
-@app.route('/profiles')
+@app.route('/profiles/')
 def profiles():
     return render_template('profileSection.html')
+
+
+
+@app.route('/profiles/<string:username>/')
+def public_profile(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    return render_template('publicUserProfile.html', user=user)
