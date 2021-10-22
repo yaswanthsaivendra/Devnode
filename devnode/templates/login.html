@@ -8,11 +8,14 @@
 {% endblock css %}
 
 {% block navigation %}
+  <div class="navigation">
     <h2><a href="{{ url_for('index') }}" class="logo">Devnode</a></h2>
     <p><a href="{{ url_for('index') }}" id="close">x</a></p>
+  </div>
 {% endblock navigation %}
 
 {% block content %}
+<div class="wrapper">
     <div class="formContainer">
         <h3>Welcome to</h3>
         <h1>Devnode</h1>
@@ -52,6 +55,8 @@
         </form>
         <h5 class="text-center downLink">Don't have an account?<a href="{{ url_for('signup') }}">Register</a></h5>
     </div>
+</div>
+    
 
 
 <script src="{{ url_for('static', filename='javascript/login.js') }}"></script>
