@@ -7,17 +7,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
     <link rel="stylesheet" href="../static/css/nav.css">
+    <link rel="stylesheet" href="../static/css/unconfirmed.css">
 {% endblock css %}
 
 {% block content %}
-
-<h1>Welcome!</h1>
-<br>
-<p>You have not confirmed your account. Please check your inbox (and your spam folder) - you should have received an email with a confirmation link.</p>
-<p>Didn't get the email? <a href="{{ url_for('resend_confirmation_email') }}">Resend</a>.</p>
-
+ <div class="welcomeWrapper">
+     <div class="welcomeBox">
+        <h1>Welcome to Devnode!</h1>
+        <p>You have not confirmed your account. Please check your inbox (and your spam folder) - you should have received an email with a confirmation link.</p>
+        <p>Didn't get the email? <a href="{{ url_for('resend_confirmation_email') }}">Resend</a>.</p>
+     </div>
+    
+ </div>
 {% endblock %}
-
-
 {% block footer %}
 {% endblock footer %}
