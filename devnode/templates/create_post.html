@@ -6,7 +6,7 @@
     integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
 <!-- Google Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-<link rel="stylesheet" href="../static/css/createpost.css">
+<link rel="stylesheet" href="{{ url_for('static', filename= 'css/createpost.css') }}">
 {% endblock css %}
 
 {% block navigation %}
@@ -133,7 +133,7 @@
                             </div>
                             <div class="col-sm">
                                 <label for="datemin">Enter Date of contest</label>
-                                <input type="date" id="datemin" name="datemin"><br><br>
+                                <input type="datetime" id="datemin" name="datemin"><br><br>
                             </div>
                         </div>
 
