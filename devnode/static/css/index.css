@@ -7,6 +7,7 @@
 }
 body{
     background-color: #f7f7f7;
+    overflow-x: hidden;
 }
  /* Navbar */
  nav{
@@ -107,7 +108,7 @@ a:hover{
 /* navbar close */
 .containerMain{
     /* background-color: rgb(128, 137, 61); */
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -170,4 +171,89 @@ a:hover{
 }
 .shinybtn:hover::before{
     transform: skew(-45deg) translateX(180px);
+}
+.contentWrapper{
+    /* color: white !important; */
+    background-color: #a6a6a613;
+    /* background-color: #4A5150; */
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.contentWrapper h1{
+    padding-top: 20px;
+    color: #4A5150;
+    /* color: #fbe182; */
+    font-size: 2.5rem;
+    text-shadow: 0 2px 5px rgba(128, 128, 128, 0.231);
+}
+.content{
+    /* background-color: antiquewhite; */
+    width: 90vw;
+    min-height: 80vh;
+    display: flex;
+    flex-wrap: wrap;
+}
+.left{
+    /* background-color: violet; */
+    width: 25%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  
+}
+.center{
+    /* background-color: #541919; */
+    width: 50%;
+    min-height: 80vh;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+}
+.center img{
+    width: 100%;
+    height: 90%;
+    object-fit: contain;
+}
+.right{
+    width: 25%;
+    min-height: 80vh;
+    /* background-color: #4A5150; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+/* content responsive */
+@media(max-width:1000px){
+    .left{
+        width:100vw ;
+        min-height: 60vh;
+    }
+    .center{
+        width: 100vw;
+    }
+    .right{
+        width: 100vw;
+        min-height: 60vh;
+    }
+    .point{
+        text-align: center;
+    }
+}
+.point{
+    width: 75%;
+}
+.point h1{
+    /* color: #f7f7f7 !important; */
+ font-size: 4rem;
+ /* color: #263238; */
+ color: #455a64;
+}
+.point p{
+    color: #4A5150;
+    font-size: 20px;
 }

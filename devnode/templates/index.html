@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 
 {% block css %}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/index.css') }}">
-    <link rel="stylesheet" href="../static/css/nav.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename= 'css/index.css') }}">
+<link rel="stylesheet" href="../static/css/nav.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 {% endblock css %}
 
 {% block content %}
@@ -16,8 +16,46 @@
         <a href="{{ url_for('signup') }}" class="btn btn-light shinybtn">Sign up</a>
     </div>
     <div class="imgBox">
-        <img src="{{ url_for('static', filename= 'assets/illustration.jpg') }}" class="ilimg img-fluid" alt="illustration" srcset="">
+        <img src="{{ url_for('static', filename= 'assets/illustration.jpg') }}" class="ilimg img-fluid"
+            alt="illustration" srcset="">
     </div>
+</div>
+<div class="contentWrapper">
+    <h1 class="text-center">How to leverage Devnode effectively ?</h1>
+    <div class="content">
+        <div class="left">
+            <div class="point first">
+                <h1>01</h1>
+                <p>Find like-minded People.</p>
+            </div>
+            <div class="point second">
+                <h1>02</h1>
+                <p>Post your needs.</p>
+            </div>
+            <div class="point third">
+                <h1>03</h1>
+                <p>Showcase your Skills.</p>
+            </div>
+        </div>
+        <div class="center">
+            <img src="../static/assets/Creative team-cuate (1).png" alt="">
+        </div>
+        <div class="right">
+            <div class="point first">
+                <h1>04</h1>
+                <p>Use social media to communicate.</p>
+            </div>
+            <div class="point second">
+                <h1>05</h1>
+                <p>Network with people.</p>
+            </div>
+            <div class="point third">
+                <h1>06</h1>
+                <p>And Collaborate!</p>
+            </div>
+        </div>
+    </div>
+    
 </div>
 
 
@@ -27,4 +65,22 @@
 
 <!-- js for index page here -->
 <script src="{{ url_for('static', filename='javascript/index.js' ) }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/ScrollTrigger.min.js"></script>
+<script>
+    let tl=gsap.timeline({
+        scrollTrigger:{
+            trigger:'.contentWrapper',
+        }
+    });
+    tl.from(".center img",{y:100,opacity:0,duration:1})
+    .from(".left .first",{x:-200,opacity:0,duration:1})
+    .from(".right .first",{x:200,opacity:0},"-=1")
+    .from(".left .second",{x:-200,opacity:0,duration:1})
+    .from(".right .second",{x:200,opacity:0},"-=1")
+    .from(".left .third",{x:-200,opacity:0,duration:1})
+    .from(".right .third",{x:200,opacity:0},"-=1")
+
+    // tl.from(".center img",{y:200,opacity:0,delay:0})
+</script>
 {% endblock content %}
