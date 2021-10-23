@@ -76,14 +76,12 @@
                         <div class="skillsHeader">
                             <h4 class="m-2">Skills</h4>
                             <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                class="btn btn-light">Add Skills</button>
+                                class="btn btn-light">Add/Remove Skills</button>
                         </div>
                         <div class="skillsBox my-3">
-                            <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
-                            <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
-                            <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
-                            <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
-                            <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
+                            {% for skill in user_skills %}
+                                <span class="badge bg-dark px-3 py-2 m-2">{{skill.name}}</span>
+                            {% endfor %}
                         </div>
 
                     </div>
@@ -287,34 +285,22 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
-
+                    <form action="" method="post">
+                        {{add_skill_form.hidden_tag()}}
                         <div class="form-group">
-                            <label for="message-text" class="col-form-label">Add new skill:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
+                            {{add_skill_form.skill_name.label(class="form-label")}}
+                            {{add_skill_form.skill_name(class="form-control")}}
+                            {{add_skill_form.submit(class="btn btn-success mt-2 form-control")}}
                         </div>
-
                     </form>
                     <div class="skillsBox my-3">
-                        <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-trash" viewBox="0 0 16 16">
-                            <path
-                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                            <path fill-rule="evenodd"
-                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                        </svg>
+                        <span>Click on a skill to remove it</span>
                         <br>
-                        <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
-                        <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
-                        <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
-                        <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
+                        {% for skill in user_skills %}
+                            <a href="/removeSkill?skill_name={{skill.name}}" class="btn btn-danger">{{skill.name}}</a>
+                        {% endfor %}
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
             </div>
         </div>
     </div>
