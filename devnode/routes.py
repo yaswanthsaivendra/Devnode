@@ -2,9 +2,9 @@ from flask import render_template, url_for, redirect, request
 from flask.helpers import flash
 from flask_login.utils import login_user, logout_user
 from devnode import app, bcrypt, db
-from devnode.forms import LoginForm, RequestResetForm, ResetPasswordForm, SignupForm, UpdateAccountForm, UpdateCoverPicture, UpdateProfilePicture
+from devnode.forms import AddSkill, LoginForm, RequestResetForm, ResetPasswordForm, SignupForm, UpdateAccountForm, UpdateCoverPicture, UpdateProfilePicture
 from flask_login import current_user, login_user, login_required
-from devnode.models import User
+from devnode.models import Skill, User
 # from flask_mail import Message
 from trycourier import Courier
 import os
@@ -224,8 +224,15 @@ def save_cover_picture(form_picture):
 @login_required
 @app.route('/userProfile/', methods=['GET', 'POST'])
 def user_profile():
+    user_skills = current_user.skills
     if current_user.is_authenticated and not current_user.confirmed:
         return redirect(url_for('unconfirmed'))
+    add_skill_form = AddSkill()
+    if add_skill_form.validate_on_submit():
+        new_skill_name = add_skill_form.skill_name.data
+        current_user.skills.append(Skill(name=new_skill_name))
+        db.session.commit()
+
     form = UpdateAccountForm()
     if form.validate_on_submit():
         current_user.username = form.username.data
@@ -255,6 +262,7 @@ def user_profile():
         form.linkedin_id.data = current_user.linkedin_id
         form.github_id.data = current_user.github_id
         form.discord_id.data = current_user.discord_id
+
     profile_form = UpdateProfilePicture()
     if profile_form.validate_on_submit():
         if profile_form.profile_picture.data:
@@ -274,8 +282,14 @@ def user_profile():
             return redirect(url_for('user_profile'))
     profile_image_file = url_for('static', filename= 'profile_pics/' + current_user.profile_image_file )
     cover_image_file = url_for('static', filename= 'cover_pics/' + current_user.cover_image_file )
-    return render_template('userProfile.html', title='Account', form=form, profile_form=profile_form, cover_form=cover_form, profile_image_file=profile_image_file, cover_image_file=cover_image_file)
+    return render_template('userProfile.html', title='Account', form=form, profile_form=profile_form, cover_form=cover_form, profile_image_file=profile_image_file, cover_image_file=cover_image_file, add_skill_form=add_skill_form, user_skills=user_skills)
 
+@app.route('/removeSkill')
+def remove_skill():
+    skill_to_delete = request.args['skill_name']
+    current_user.skills = list(filter(lambda s: s.name != skill_to_delete, current_user.skills))
+    db.session.commit()
+    return redirect('/userProfile')
 
 @app.route('/profiles/')
 def profiles():

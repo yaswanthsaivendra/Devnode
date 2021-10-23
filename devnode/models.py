@@ -9,6 +9,10 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+association_table = db.Table('association',
+    db.Column('skill_id', db.Integer, db.ForeignKey('skill.id'), primary_key=True),
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True)
+)
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,7 +30,8 @@ class User(db.Model, UserMixin):
     twitter_id = db.Column(db.String(120), unique=True)
     github_id = db.Column(db.String(120), unique=True)
     linkedin_id = db.Column(db.String(120), unique=True)
-
+    skills = db.relationship('Skill', secondary=association_table, lazy='subquery',
+        backref=db.backref('User', lazy=True))
 
     def get_token(self, expires_sec=1800):
         s = Serializer(app.config['SECRET_KEY'], expires_sec)
@@ -45,3 +50,7 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"User'{self.username}', '{self.email}'"
+
+class Skill(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20))
