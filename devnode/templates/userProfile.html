@@ -297,7 +297,8 @@
                         <span>Click on a skill to remove it</span>
                         <br>
                         {% for skill in user_skills %}
-                            <a href="/removeSkill?skill_name={{skill.name}}" class="btn btn-danger">{{skill.name}}</a>
+                            <!-- <a href="/removeSkill?skill_name={{skill.name}}" class="btn btn-danger">{{skill.name}}</a> -->
+                            <a href="{{url_for('remove_skill', skill_name=skill.name)}}" class="btn btn-danger">{{skill.name}}</a>
                         {% endfor %}
                     </div>
                 </div>
