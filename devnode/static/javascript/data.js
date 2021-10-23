@@ -1,6 +1,6 @@
 
 
-const userData = [
+const userDatafake = [
     {
        userName: "rina",
        userImage: "https://m.media-amazon.com/images/I/71hMEM1a9EL._SX425_.jpg",
