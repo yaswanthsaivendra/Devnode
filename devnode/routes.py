@@ -277,8 +277,8 @@ def user_profile():
     return render_template('userProfile.html', title='Account', form=form, profile_form=profile_form, cover_form=cover_form, profile_image_file=profile_image_file, cover_image_file=cover_image_file)
 
 
-@app.route('/profiles/')
-def profiles():
+@app.route('/profiles_api/')
+def profiles_api():
     respones = []
     for user in User.query.all():
         resp = {}
@@ -291,6 +291,12 @@ def profiles():
         resp['email'] = user.email
         respones.append(resp)
     return {"data":respones}
+
+
+@app.route('/profiles/')
+def profiles():
+    return render_template('profileSection.html')
+
 
 
 
