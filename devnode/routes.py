@@ -231,8 +231,9 @@ def user_profile():
     add_skill_form = AddSkill()
     if add_skill_form.validate_on_submit():
         new_skill_name = add_skill_form.skill_name.data
-        current_user.skills.append(Skill(name=new_skill_name))
-        db.session.commit()
+        if new_skill_name not in list(map(lambda s: s.name, current_user.skills)):
+            current_user.skills.append(Skill(name=new_skill_name))
+            db.session.commit()
 
     form = UpdateAccountForm()
     if form.validate_on_submit():
