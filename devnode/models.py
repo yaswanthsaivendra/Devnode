@@ -3,6 +3,7 @@ from devnode import db, app
 from flask_login import UserMixin
 from devnode import login_manager
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from datetime import datetime
 
 
 @login_manager.user_loader
@@ -32,6 +33,7 @@ class User(db.Model, UserMixin):
     linkedin_id = db.Column(db.String(120), unique=True)
     skills = db.relationship('Skill', secondary=association_table, lazy='subquery',
         backref=db.backref('User', lazy=True))
+    posts = db.relationship('Post', backref='author', lazy=True)
 
     def get_token(self, expires_sec=1800):
         s = Serializer(app.config['SECRET_KEY'], expires_sec)
@@ -53,4 +55,20 @@ class User(db.Model, UserMixin):
 
 class Skill(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20))
+    name = db.Column(db.String(20), unique=True)
+
+
+
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120), nullable=False)
+    content= db.Column(db.Text, nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    category = db.Column(db.String(120), nullable=False)
+    last_date = db.Column(db.String(120), nullable=False)
+    persons_required = db.Column(db.Integer, nullable=False)
+    user_id=db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):
+        return f"User'{self.title}', '{self.date_posted}'"

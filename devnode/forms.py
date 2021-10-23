@@ -87,3 +87,12 @@ class UpdateCoverPicture(FlaskForm):
 class AddSkill(FlaskForm):
     skill_name = StringField('Enter skill name', validators=[DataRequired()])
     submit = SubmitField("Add")
+
+
+class PostForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    content = TextAreaField('Content', validators=[DataRequired()])
+    category = SelectField('Category', validators=[DataRequired()], choices= ['Hackathon', "Competetive Coding Contest", 'Opensource Project', 'other'])
+    persons_required = SelectField('Number of Persons Required', validators=[DataRequired()], choices=[1,2,3,4,5,6,7,8])
+    last_date = StringField('Last date', validators=[DataRequired()])
+    submit = SubmitField('Post')

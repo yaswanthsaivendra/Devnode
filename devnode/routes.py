@@ -2,7 +2,7 @@ from flask import render_template, url_for, redirect, request
 from flask.helpers import flash
 from flask_login.utils import login_user, logout_user
 from devnode import app, bcrypt, db
-from devnode.forms import AddSkill, LoginForm, RequestResetForm, ResetPasswordForm, SignupForm, UpdateAccountForm, UpdateCoverPicture, UpdateProfilePicture
+from devnode.forms import AddSkill, LoginForm, RequestResetForm, ResetPasswordForm, SignupForm, UpdateAccountForm, UpdateCoverPicture, UpdateProfilePicture, PostForm
 from flask_login import current_user, login_user, login_required
 from devnode.models import  Skill, User
 # from flask_mail import Message
@@ -332,14 +332,14 @@ def feed():
 
 
 
-# @app.route('/feed/new_post/', methods=['GET', 'POST'])
-# @login_required
-# def new_post():
-#     form = PostForm()
-#     if form.validate_on_submit():
-#         post = Post(title= form.title.data, content= form.content.data, persons_required = form.persons_required.data, category=form.category.data, last_date=form.last_date.data, author =current_user)
-#         db.session.add(post)
-#         db.session.commit()
-#         flash('Your post has been created', 'success')
-#         return redirect(url_for('feed'))
-#     return render_template('create_post.html', title= 'New Post', form=form)
+@app.route('/feed/new_post/', methods=['GET', 'POST'])
+@login_required
+def new_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title= form.title.data, content= form.content.data, persons_required = form.persons_required.data, category=form.category.data, last_date=form.last_date.data, author =current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created', 'success')
+        return redirect(url_for('feed'))
+    return render_template('create_post.html', title= 'New Post', form=form)
