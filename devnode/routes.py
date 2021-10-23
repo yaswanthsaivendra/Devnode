@@ -4,7 +4,7 @@ from flask_login.utils import login_user, logout_user
 from devnode import app, bcrypt, db
 from devnode.forms import AddSkill, LoginForm, RequestResetForm, ResetPasswordForm, SignupForm, UpdateAccountForm, UpdateCoverPicture, UpdateProfilePicture
 from flask_login import current_user, login_user, login_required
-from devnode.models import Post, Skill, User
+from devnode.models import  Skill, User
 # from flask_mail import Message
 from trycourier import Courier
 import os
