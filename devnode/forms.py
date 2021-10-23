@@ -1,3 +1,4 @@
+from flask.app import Flask
 from flask_wtf import FlaskForm
 from wtforms.fields.core import SelectField, StringField
 from wtforms.fields.simple import FileField, PasswordField, SubmitField, TextAreaField
@@ -82,3 +83,7 @@ class UpdateProfilePicture(FlaskForm):
 class UpdateCoverPicture(FlaskForm):
     cover_picture = FileField('Update Cover Picture', validators=[FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Save')
+
+class AddSkill(FlaskForm):
+    skill_name = StringField('Enter skill name', validators=[DataRequired()])
+    submit = SubmitField("Add")
