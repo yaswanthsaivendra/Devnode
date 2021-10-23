@@ -2,9 +2,9 @@ from flask import render_template, url_for, redirect, request
 from flask.helpers import flash
 from flask_login.utils import login_user, logout_user
 from devnode import app, bcrypt, db
-from devnode.forms import AddSkill, LoginForm, RequestResetForm, ResetPasswordForm, SignupForm, UpdateAccountForm, UpdateCoverPicture, UpdateProfilePicture
+from devnode.forms import AddSkill, LoginForm, PostForm, RequestResetForm, ResetPasswordForm, SignupForm, UpdateAccountForm, UpdateCoverPicture, UpdateProfilePicture
 from flask_login import current_user, login_user, login_required
-from devnode.models import Skill, User
+from devnode.models import Post, Skill, User
 # from flask_mail import Message
 from trycourier import Courier
 import os
@@ -296,8 +296,10 @@ def profiles_api():
     respones = []
     for user in User.query.all():
         resp = {}
-        resp['cover_pic'] = user.cover_image_file
-        resp['profile_pic'] = user.profile_image_file
+        profile_image_file = url_for('static', filename= 'profile_pics/' + user.profile_image_file )
+        cover_image_file = url_for('static', filename= 'cover_pics/' + user.cover_image_file )
+        resp['cover_pic'] = cover_image_file
+        resp['profile_pic'] = profile_image_file
         resp['username'] = user.username
         resp['designation'] = user.designation
         resp['github_id'] = user.github_id
@@ -322,15 +324,20 @@ def public_profile(username):
     return render_template('publicUserProfile.html', user=user)
 
 
+@app.route('/feed/')
+def feed():
+    return render_template('feed.html')
+
+
 
 @app.route('/feed/new_post/', methods=['GET', 'POST'])
 @login_required
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(title= form.title.data, content= form.content.data, author =current_user)
+        post = Post(title= form.title.data, content= form.content.data, persons_required = form.persons_required.data, category=form.category.data, last_date=form.last_date.data, author =current_user)
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created', 'success')
-        return redirect(url_for('main.home'))
-    return render_template('create_post.html', title= 'New Post', form=form,legend ="New Post")
+        return redirect(url_for('feed'))
+    return render_template('create_post.html', title= 'New Post', form=form)
