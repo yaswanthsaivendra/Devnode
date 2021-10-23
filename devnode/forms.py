@@ -118,5 +118,5 @@ class PostForm(FlaskForm):
     content = TextAreaField('Content', validators=[DataRequired()])
     category = SelectField('Category', validators=[DataRequired()], choices= ['Hackathon', "Competetive Coding Contest", 'Opensource Project', 'other'])
     persons_required = SelectField('Number of Persons Required', validators=[DataRequired()], choices=[1,2,3,4,5,6,7,8])
-    last_date = DateField('Last date', validators=[DataRequired()], format="%Y-%m-%d")
+    last_date = DateField('Last date', validators=[DataRequired()], format="%Y-%d-%m")
     submit = SubmitField('Post')

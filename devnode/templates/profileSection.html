@@ -4,21 +4,21 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
-    <link rel="stylesheet" href="../static/css/profileSection.css">
-    <link rel="stylesheet" href="../static/css/nav.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profileSection.css' ) }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css' ) }}">
 {% endblock css %}
 
 {% block navigation %}
 <div id="nav">
     <nav>
         <div class="logo">
-            <h3 class="logoName">Devnode</h3>
+            <a href="{{ url_for('index' ) }}"><h3 class="logoName">Devnode</h3></a>
         </div>
         <i class="fa fa-bars" id="open"></i>
         <div class="menu" id="menuList">
             <i class="fa fa-times" id="close"></i>
             <ul>
-                <li><a href="#">Feed</a></li>
+                <li><a href="{{ url_for('feed' ) }}">Feed</a></li>
                 <li><a href="{{url_for('profiles')}}">Profiles</a></li>
                 {% if current_user.is_authenticated %}
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
@@ -42,14 +42,10 @@
         <input class="form-control mr-sm-2 mx-2" type="search" placeholder="Search by Name" aria-label="Search" id="inputField" autocomplete="off" autofocus>
         <button class="btn btn-outline-dark  my-sm-0"  id="btn">Search</button>
         <!-- <button class="btn btn-outline-dark my-sm-0"  id="btn2">Search by Tags</button> -->
-        <form class="form-inline">
-            <input class="form-control mr-sm-2 mx-2" type="search" placeholder="Search by Skills" aria-label="Search" id="inputField2" autocomplete="off" autofocus> 
-           <button class="btn btn-outline-dark my-sm-0"  id="btn2">Search</button>
-       </form>
     </form>
 </div>
 <div class="searchBox mt-1">
-   
+
 </div>
 
 <div id="cards" class="profile">
@@ -58,8 +54,8 @@
 
 </div>
 </body>
-<script src="../static/javascript/data.js"></script>
-<script src="../static/javascript/profileSection.js"></script>
+<script src="{{ url_for('static', filename='javascript/data.js' ) }}"></script>
+<script src="{{ url_for('static', filename='javascript/profileSection.js' ) }}"></script>
 {% endblock content %}
 
 

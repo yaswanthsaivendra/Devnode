@@ -5,12 +5,10 @@ from devnode import app, bcrypt, db
 from devnode.forms import AddSkill, LoginForm, RequestResetForm, ResetPasswordForm, SignupForm, UpdateAccountForm, UpdateCoverPicture, UpdateProfilePicture, PostForm
 from flask_login import current_user, login_user, login_required
 from devnode.models import Post, Skill, User
-# from flask_mail import Message
 from trycourier import Courier
 import os
 import secrets
 from PIL import Image
-from flask import jsonify
 
 
 client = Courier(auth_token="dk_prod_FAM6GKCBX44SYRGDC1JVPB3E8TB8")
@@ -86,16 +84,6 @@ def confirm_email(token):
 
 def send_confirmation_email(user):
     token = user.get_token()
-    # msg = Message('Confirm Your Email',
-    #  sender='noreply@demo.com', recipients=[user.email])
-
-    # msg.body = f'''To Confirm Your account, visit the following link:
-    # {url_for('confirm_email', token=token, _external=True)}
-
-    # If you did not make this request then simply ignore this email.
-    # '''
-    # mail.send(msg)
-
     client.send(
     event="66ZVXFNNSKM3DCKMRNKT9E61ERB6",
     recipient="1ce9bc75-6700-4417-b939-4eb150c2fbc1",
@@ -174,17 +162,6 @@ def reset_token(token):
 
 def send_reset_email(user):
     token = user.get_token()
-    # msg = Message('Password Reset Request',
-    #  sender='noreply@demo.com', recipients=[user.email])
-
-    # msg.body = f'''To reset your password, visit the following link:
-    # {url_for('reset_token', token=token, _external=True)}
-
-    # If you did not make this request then simply ignore this email.
-    # '''
-    # mail.send(msg)
-
-
     client.send(
     event="78PBTX41D646JGKZ8MTCM6PXQSVY",
     recipient="7179bf35-4578-4730-9660-bd3b77dd4a35",
@@ -314,12 +291,8 @@ def profiles_api():
         resp['github_id'] = user.github_id
         resp['linkdedin_id'] = user.linkedin_id
         resp['email'] = user.email
-        skills = []
-        for skill in user.skills:
-            skills.append(skill)
-        resp['skills'] = skills
         respones.append(resp)
-    return jsonify({"data":respones})
+    return {"data":respones}
 
 
 @app.route('/profiles/')
@@ -367,7 +340,7 @@ def feed_other():
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(title= form.title.data, content= form.content.data, persons_required = form.persons_required.data, category=form.category.data, last_date=form.last_date.data, author =current_user)
+        post = Post(title= form.title.data, content= form.content.data, persons_required = form.persons_required.data, last_date=form.last_date.data, category=form.category.data, author =current_user)
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created', 'success')

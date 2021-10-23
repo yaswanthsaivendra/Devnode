@@ -22,13 +22,13 @@
 <div id="nav">
     <nav>
         <div class="logo">
-            <h3 class="logoName">Devnode</h3>
+            <a href="{{ url_for('index' ) }}"><h3 class="logoName">Devnode</h3></a>
         </div>
         <i class="fa fa-bars" id="open"></i>
         <div class="menu" id="menuList">
             <i class="fa fa-times" id="close"></i>
             <ul>
-                <li><a href="#">Feed</a></li>
+                <li><a href="{{ url_for('feed' ) }}">Feed</a></li>
                 <li><a href="{{ url_for('profiles') }}">Profiles</a></li>
                 {% if current_user.is_authenticated %}
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
@@ -53,7 +53,7 @@
         <div class="coverPic"></div>
         <div class="profilePicWrapper">
             <div class="profilePic">
-                <img src="{{user.profile_image_file}}"
+                <img src="{{ user.profile_image_file }}"
                     alt="" srcset="">
             </div>
             <div class="nameBox">
