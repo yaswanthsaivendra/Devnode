@@ -62,18 +62,18 @@ function userCard(user) {
   `;
   }
   // function to search tags
-  function SearchTagsFxn() {
-    userRender = [];
-    userData.map((user, i) => {
-      let skillsArray = user.skills;
-      skillsArray.map((skill)=>{
-        if(skill.includes(inputText)){
-          userRender = [...userRender, user];
-          userRender = [...new Set(userRender)];
-        }
-      })
-    });
-    document.getElementById("cards").innerHTML = `
-  ${userRender.map(userCard).join("")}
-  `;
-  }
+  // function SearchTagsFxn() {
+  //   userRender = [];
+  //   userData.map((user, i) => {
+  //     let skillsArray = user.skills;
+  //     skillsArray.map((skill)=>{
+  //       if(skill.includes(inputText)){
+  //         userRender = [...userRender, user];
+  //         userRender = [...new Set(userRender)];
+  //       }
+  //     })
+  //   });
+  //   document.getElementById("cards").innerHTML = `
+  // ${userRender.map(userCard).join("")}
+  // `;
+  // }

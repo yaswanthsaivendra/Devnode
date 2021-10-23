@@ -8,6 +8,8 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
 <link rel="stylesheet" href="{{ url_for('static', filename= 'css/createpost.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename= 'css/nav.css') }}">
+
 
 {% endblock css %}
 
@@ -39,9 +41,9 @@
 {% block content %}
 <body>
 <div>
-    <h2 class="page-title"> Create post</h2>
+    <h2 class="page-title text-center">Create post</h2>
     <div class="w-75 p-3 mx-auto">
-        <div class="shadow p-3 mb-5 bg-white rounded">
+        <div class="shadow p-3 mb-5 bg-white rounded box">
             <form action="" method="post" class="row g-3">
                 {{ form.hidden_tag() }}
                 <div class="mb-3">
@@ -70,7 +72,7 @@
                 </div>
 
                 <div>
-                    {{ form.submit(class="btn btn-primary", value="Publish Post") }}
+                    {{ form.submit(class="btn btn-primary publishbtn", value="Publish Post") }}
                 </div>
             </form>
         </div>
@@ -101,7 +103,6 @@
             });
     </script>
     {% endblock content %}
-
 
 
 

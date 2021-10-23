@@ -1,8 +1,16 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@500&display=swap');
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+   
+}
+.page-title{
+    padding-top: 100px;
+}
 .body{
     align-items: center;
 }
-
 .shadow p-3 mb-5 bg-white rounded{
     max-width: 60%;
     align-items: center;
@@ -13,7 +21,14 @@
     align-items: center;
 }
 .page-title{
-margin-left: 40%;
 color:#4A5150;
-margin: 40px 43%;
+}
+.publishbtn{
+    background-color: #4A5150 !important;
+    border:none !important;
+}
+label{
+    color: #4A5150;
+    font-weight: 400;
+    font-family: 'Baloo Tamma 2', sans-serif;
 }
