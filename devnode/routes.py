@@ -2,11 +2,14 @@ from flask import render_template, url_for, redirect, request
 from flask.helpers import flash
 from flask_login.utils import login_user, logout_user
 from devnode import app, bcrypt, db
-from devnode.forms import LoginForm, RequestResetForm, ResetPasswordForm, SignupForm, UpdateAccountForm
+from devnode.forms import LoginForm, RequestResetForm, ResetPasswordForm, SignupForm, UpdateAccountForm, UpdateCoverPicture, UpdateProfilePicture
 from flask_login import current_user, login_user, login_required
 from devnode.models import User
 # from flask_mail import Message
 from trycourier import Courier
+import os
+import secrets
+from PIL import Image
 
 client = Courier(auth_token="dk_prod_FAM6GKCBX44SYRGDC1JVPB3E8TB8")
 
@@ -193,6 +196,28 @@ def send_reset_email(user):
     },
     )
 
+def save_profile_picture(form_picture):
+    random_hex = secrets.token_hex(8)
+    f_name, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
+    output_size = (125, 125)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+    return picture_fn
+
+
+def save_cover_picture(form_picture):
+    random_hex = secrets.token_hex(8)
+    f_name, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/cover_pics', picture_fn)
+    output_size = (600, 300)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+    return picture_fn
 
 
 
@@ -230,7 +255,26 @@ def user_profile():
         form.linkedin_id.data = current_user.linkedin_id
         form.github_id.data = current_user.github_id
         form.discord_id.data = current_user.discord_id
-    return render_template('userProfile.html', title='Account', form=form)
+    profile_form = UpdateProfilePicture()
+    if profile_form.validate_on_submit():
+        if profile_form.profile_picture.data:
+            picture_file = save_profile_picture(profile_form.profile_picture.data)
+            current_user.profile_image_file = picture_file
+            db.session.commit()
+            flash('Your profile picture has been updated', 'success')
+            return redirect(url_for('user_profile'))
+
+    cover_form = UpdateCoverPicture()
+    if cover_form.validate_on_submit():
+        if cover_form.cover_picture.data:
+            picture_file = save_cover_picture(cover_form.cover_picture.data)
+            current_user.cover_image_file = picture_file
+            db.session.commit()
+            flash('Your cover picture has been updated', 'success')
+            return redirect(url_for('user_profile'))
+    profile_image_file = url_for('static', filename= 'profile_pics/' + current_user.profile_image_file )
+    cover_image_file = url_for('static', filename= 'cover_pics/' + current_user.cover_image_file )
+    return render_template('userProfile.html', title='Account', form=form, profile_form=profile_form, cover_form=cover_form, profile_image_file=profile_image_file, cover_image_file=cover_image_file)
 
 
 @app.route('/profiles/')
