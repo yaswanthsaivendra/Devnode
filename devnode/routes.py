@@ -11,6 +11,7 @@ import os
 import secrets
 from PIL import Image
 
+
 client = Courier(auth_token="dk_prod_FAM6GKCBX44SYRGDC1JVPB3E8TB8")
 
 
