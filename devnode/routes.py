@@ -313,6 +313,7 @@ def profiles_api():
         resp['github_id'] = user.github_id
         resp['linkdedin_id'] = user.linkedin_id
         resp['email'] = user.email
+        resp['skills'] = user.skills
         respones.append(resp)
     return {"data":respones}
 

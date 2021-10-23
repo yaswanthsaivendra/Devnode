@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Baloo Tamma 2", cursive;
+  color: #4A5150;
+}
+body {
+  display: flex;
+  justify-content: center;
+}
+.wrapper {
+  margin-top: 100px;
+  /* background-color: aquamarine; */
+  width: 1200px;
+  display: flex;
+  justify-content: space-between;
+}
+.postsection {
+  max-width: 700px;
+}
+.post{
+    margin: 0 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px 1px rgba(128, 128, 128, 0.537);
+}
+.post h1{
+    padding: 10px;
+    margin: 0 !important;
+}
+.category {
+  width: 300px;
+  height: 400px;
+  box-shadow: 0 2px 6px 1px rgba(128, 128, 128, 0.537);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center !important;
+  border-radius: 10px;
+  padding: 10px;
+}
+.postdetails {
+    position: relative;
+    bottom: 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.usernameDate {
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+}
+.profilePic {
+  background-color: rgb(207, 207, 240);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.postdetails a{
+    text-decoration: none;
+    /* color: rgb(165, 205, 230); */
+}
+.badge{
+    font-size: 14px !important;
+    background-color: rgb(222, 237, 243);
+    font-weight: 400 !important;
+    color: #4A5150 !important;
+}
+.editBox{
+    padding-right: 20px;
+height: 0;
+display: flex;
+justify-content: flex-end;
+}
+.editicon{
+    position: relative;
+    bottom: 40px;
+    border: 1px solid #4A5150;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    border-radius: 50%;
+    
+}
+@media(max-width:1100px){
+    .postdetails{
+        position: inherit;
+    }
+    .wrapper{
+        justify-content: center;
+        flex-wrap: wrap-reverse;
+    }
+    .postsection{
+        max-width: 98vw !important;
+    }
+    .category{
+        width: 98vw !important;
+
+    }
+}
