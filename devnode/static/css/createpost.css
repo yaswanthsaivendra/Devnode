@@ -1,0 +1,19 @@
+
+.body{
+    align-items: center;
+}
+
+.shadow p-3 mb-5 bg-white rounded{
+    max-width: 60%;
+    align-items: center;
+    background-color: rgb(31, 173, 142);
+}
+.row g-3{
+    max-width: 60%;
+    align-items: center;
+}
+.page-title{
+margin-left: 40%;
+color:#4A5150;
+margin: 40px 43%;
+}
