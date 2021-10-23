@@ -1,0 +1,73 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <!-- Google Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/css/createpost.css">
+    <title>Devnode</title>
+  </head>
+  <body>
+    <div >
+        <h2 class="page-title" > Create post</h2>
+        <div class="w-75 p-3 mx-auto">
+        <div class="shadow p-3 mb-5 bg-white rounded" >
+        <form class="row g-3">
+            <div class="mb-3">
+            <label>Title</label>
+            <input type="text" name="title" class="form-control">
+            </div>
+            <div class="mb-3">
+            <label>Body</label>
+            <input type="text" name="body" id="body">
+            </div>
+            <div class="row g-3">
+  <div class="col-sm">
+     <select name="Category">
+                    <option value="Hackathon">Hackathon</option>
+                    <option value="Competative coding">Competative coding</option>
+                    <option value="Open Source">Open Source</option>
+                    <option value="Others">Others</option>
+                </select>
+  </div>
+  <div class="col-sm">
+    <label>Team size</label>
+            <input type="numberedList" name="title" id="body" min="1" max="5">
+  </div>
+  <div class="col-sm">
+    <label for="datemin">Enter Date of contest</label>
+  <input type="date" id="datemin" name="datemin" ><br><br>
+  </div>
+</div>
+            
+            <div>
+                <button type="submit" class="btn btn-primary">Publish Post</button>
+            </div>
+        </form>
+        </div>
+        </DIV>
+    </div>
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+<script>
+
+
+ClassicEditor
+    .create( document.querySelector( '#body' ), {
+        toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+        heading: {
+            options: [
+                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+            ]
+        }
+    } )
+    .catch( error => {
+        console.log( error );
+    } );
+</script>
+  </body>
+  </html>
