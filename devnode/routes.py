@@ -1,4 +1,4 @@
-from flask import render_template, url_for, redirect, request
+from flask import render_template, url_for, redirect, request, abort
 from flask.helpers import flash
 from flask_login.utils import login_user, logout_user
 from devnode import app, bcrypt, db
@@ -10,6 +10,7 @@ from trycourier import Courier
 import os
 import secrets
 from PIL import Image
+from flask import jsonify
 
 
 client = Courier(auth_token="dk_prod_FAM6GKCBX44SYRGDC1JVPB3E8TB8")
@@ -318,7 +319,7 @@ def profiles_api():
             skills.append(skill)
         resp['skills'] = skills
         respones.append(resp)
-    return {"data":respones}
+    return jsonify({"data":respones})
 
 
 @app.route('/profiles/')
@@ -338,7 +339,26 @@ def public_profile(username):
 
 @app.route('/feed/')
 def feed():
-    return render_template('feed.html')
+     posts = Post.query.filter_by(category='Hackathon').order_by(Post.date_posted.desc())
+     return render_template('posts.html', posts=posts)
+
+
+@app.route('/feed/competetive_coding/')
+def feed_comp():
+     posts = Post.query.filter_by(category='Competetive Coding Contest').order_by(Post.date_posted.desc())
+     return render_template('posts.html', posts=posts)
+
+
+@app.route('/feed/opensource/')
+def feed_opensource():
+     posts = Post.query.filter_by(category='Opensource Project').order_by(Post.date_posted.desc())
+     return render_template('posts.html', posts=posts)
+
+
+@app.route('/feed/other/')
+def feed_other():
+     posts = Post.query.filter_by(category='other').order_by(Post.date_posted.desc())
+     return render_template('posts.html', posts=posts)
 
 
 
@@ -353,3 +373,41 @@ def new_post():
         flash('Your post has been created', 'success')
         return redirect(url_for('feed'))
     return render_template('create_post.html', title= 'New Post', form=form)
+
+
+
+@app.route('/feed/<int:post_id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.content = form.content.data
+        post.persons_required = form.persons_required.data
+        post.category=form.category.data
+        post.last_date=form.last_date.data
+        db.session.commit()
+        flash("Your post has been updated!", 'success')
+        return redirect(url_for('feed', post_id=post.id))
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.content.data = post.content
+        form.persons_required.data = post.persons_required
+        form.category.data = post.category
+        form.last_date.data = post.last_date
+    return render_template('edit_post.html', title= 'Edit Post', form=form, post=post)
+
+@app.route('/post/<int:post_id>/delete', methods=['POST'])
+@login_required
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash('Your post has been deleted', 'success')
+    return redirect(url_for('feed'))
+

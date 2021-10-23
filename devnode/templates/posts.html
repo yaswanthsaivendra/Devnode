@@ -10,73 +10,90 @@
     <link rel="stylesheet" href="../static/css/nav.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="  https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 </head>
 
 <body>
-    <div id="nav"></div>
-    <div class="wrapper">
-        <div class="postsection m-2">
-         
-            <div class="post">
-                <h1 class="pt-4">Post title</h1>
-                <div class="editBox">
-                    <p class="editicon"><i class="fas fa-pen"></i></p>
-                </div>
-              
-                <p class="p-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates, dolor voluptatum tempora modi
-                    accusantium, dolores, explicabo quas optio odit autem enim? Possimus commodi quo maxime blanditiis
-                    veritatis impedit eligendi ratione!
-                </p>
-                <span class="badge badge-light py-2 m-2">No. of people required : 4</span>
-                <span class="badge badge-dark  py-2 m-2">Event Date : dd mm yyyy</span>
-                <div class="postdetails p-2">
-                   
-                    <div class="usernameDate p-1">
-                        <a href="http://">Username</a>
-                        <small>posted on ddmmyyyy</small>
-                       
-                    </div>
-                   
-                   <div class="profilePic">
-                   </div>
-                
-                </div>
-
+    <div id="nav">
+        <nav>
+            <div class="logo">
+                <h3 class="logoName">Devnode</h3>
             </div>
-            <div class="post">
-                <h1 class="pt-4">Post title</h1>
-                <p class="p-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates, dolor voluptatum tempora modi
-                    accusantium, dolores, explicabo quas optio odit autem enim? Possimus commodi quo maxime blanditiis
-                    veritatis impedit eligendi ratione!
-                </p>
-                <span class="badge badge-light py-2 m-2">No. of people required : 4</span>
-                <span class="badge badge-dark  py-2 m-2">Event Date : dd mm yyyy</span>
-                <div class="postdetails p-2">
-                    <div class="usernameDate p-1">
-                        <a href="http://">Username</a>
-                        <small>posted on ddmmyyyy</small>
-                    </div>
-                   <div class="profilePic">
-                   </div>
-                </div>
+            <i class="fa fa-bars" id="open"></i>
+            <div class="menu" id="menuList">
+                <i class="fa fa-times" id="close"></i>
+                <ul>
+                    <li><a href="{{ url_for('feed')}}">Feed</a></li>
+                    <li><a href="{{ url_for('profiles') }}">Profiles</a></li>
+                    {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    <li><a href="{{url_for('user_profile')}}"><i class="fas fa-user" id="user"></i></a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    <a href="{{ url_for('signup') }}" class="btn btn-outline-light signupTop">Signup</a>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
 
+
+<div class="wrapper">
+    <div class="postsection m-2">
+    {% for post in posts.items %}
+
+        <div class="post">
+            <h1 class="pt-4">{{ post.title }}</h1>
+            {% if post.author == current_user %}
+            <div class="editBox">
+                <p class="editicon"><a href="{{url_for('edit_post', post_id=post.id)}}"><i class="fas fa-pen"></i></a></p>
+            </div>
+            {% endif %}
+            <p class="p-2">{{ post.content }}
+            </p>
+            <span class="badge badge-light py-2 m-2">No. of people required : {{ post.persons_required }}</span>
+            <span class="badge badge-dark  py-2 m-2">Event Date : {{ post.last_date }}</span>
+            <div class="postdetails p-2">
+                <div class="usernameDate p-1">
+                    <a href="{{url_for('public_profile')}}">{{ post.author.username }}</a>
+                    <small>posted on {{post.date_posted.strftime('%Y-%m-%d')}}</small>
+                </div>
+               <div class="profilePic">
+                <img src="{{ url_for('static', filename= 'profile_pics/' + post.author.profile_image_file) }}" alt="">
+               </div>
             </div>
         </div>
+        {% endfor %}
+
+
+    </div>
+</div>
+
+
+
+
         <div class="category right">
             <div class="postbtn my-2 w-100">
+            <a href="{{url_for('new_post')}}">
                 <button class="btn btn-dark w-100 makepost">Make a Post</button>
+            </a>
             </div>
             <div class="category">
                 <h2 class="text-center p-2">Category</h2>
-                <button class="btn btn-outline-dark w-75 my-1">Open Source</button>
-                <button class="btn btn-outline-dark w-75 my-1">Hackathon </button>
-                <button class="btn btn-outline-dark w-75 my-1">Competative Coding </button>
-                <button class="btn btn-outline-dark w-75 my-1">Others</button>
+                <a href="{{url_for('feed')}}"><button class="btn btn-outline-dark w-75 my-1">Hackathon </button></a>
+                <a href="{{url_for('feed_comp')}}"><button class="btn btn-outline-dark w-75 my-1">Competative Coding </button></a>
+                <a href="{{url_for('feed_opensource')}}"><button class="btn btn-outline-dark w-75 my-1">Open Source</button></a>
+                <a href="{{url_for('feed_other')}}"><button class="btn btn-outline-dark w-75 my-1">Others</button></a>
             </div>
-          
         </div>
-    </div>
-</body>
 
+
+
+
+
+
+
+<script src="{{ url_for('static', filename='javascript/index.js' ) }}"></script>
+
+</body>
 </html>
