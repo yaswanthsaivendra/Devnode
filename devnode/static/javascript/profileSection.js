@@ -7,7 +7,7 @@ async function getfxn(){
    console.log(resObj.data);
   userData= resObj.data;
   document.getElementById("cards").innerHTML=`
-  ${userData.map((user)=>{userCard(user)}).join("")}hwllo
+  ${userData.map(userCard).join("")}
   `;
 }
 getfxn()
