@@ -37,12 +37,21 @@
 
 
 {% block content %}
-<div class="searchBox">
-    <form class="form-inline my-2">
-        <input class="form-control mr-sm-2 mx-2" type="search" placeholder="Search" aria-label="Search" id="inputField" autocomplete="off" autofocus>
-        <button class="btn btn-outline-dark my-2 my-sm-0"  id="btn">Search</button>
+<div class=" searchBox firstSearchBox">
+    <form class="form-inline">
+        <input class="form-control mr-sm-2 mx-2" type="search" placeholder="Search by Name" aria-label="Search" id="inputField" autocomplete="off" autofocus>
+        <button class="btn btn-outline-dark  my-sm-0"  id="btn">Search</button>
+        <!-- <button class="btn btn-outline-dark my-sm-0"  id="btn2">Search by Tags</button> -->
+        <form class="form-inline">
+            <input class="form-control mr-sm-2 mx-2" type="search" placeholder="Search by Skills" aria-label="Search" id="inputField2" autocomplete="off" autofocus> 
+           <button class="btn btn-outline-dark my-sm-0"  id="btn2">Search</button>
+       </form>
     </form>
 </div>
+<div class="searchBox mt-1">
+   
+</div>
+
 <div id="cards" class="profile">
     <!-- Profile cards here-->
 

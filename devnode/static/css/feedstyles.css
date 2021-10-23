@@ -4,47 +4,33 @@
   }
   
   body {
-    background-color: #f3f2ef;
+    background-color: #e0cd94;
     display: flex;
-    flex-direction: column;
+     justify-content: center;
     
   }
-  
-  
-  /* Main Body */
-  .body__main {
+  .wrapper{
+    max-width: 900px;
+    background-color: #e0cd94;
     display: flex;
-    
-  }
-  /* Sidebar */
-  
-  
-  /* Feed */
-  .feed {
-    min-width: 80%;
-    
-    flex: 0.6;
-    margin: 80px 40px;
-  }
+    flex-wrap: wrap-reverse;
 
-  
-  /* Post */
+  }
+  .body__main{
+      max-width: 600px;
+  }
   .post {
     background-color: white;
     padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     margin-top: 20px;
     
   }
   .hideContent {
     overflow: hidden;
-    line-height: 1em;
-    height: 5em;
 }
 
 .showContent {
-    line-height: 1em;
     height: auto;
 }
 .showContent{
@@ -55,28 +41,12 @@
 .show-more {
     padding: 10px 0;
     justify-content: center;
+    background-color: white;
    
 }
-.show-more a {
-  margin-left: 80%;
- 
-}
-.inputOption{
-  float: left;
-  margin-right: 50px;
-}
-
-  
-  
   .post__header  {
-    display: flex;
+    /* display: flex; */
     margin-bottom: 10px;
-    
-   
-
-  }
-  .post_body{
-    
   }
   .post img{
     border-radius: 70%;
@@ -96,54 +66,12 @@
   .post__info > h2 {
     font-size: 15px;
   }
-  
-  
-  /*toggle section*/
-  .container{
-    background-color:white;
-    height: fit-content;
-    width: 100%;
-    border-radius: 10px;
-    text-align: center;
-    
-  }
-  .col-sm{
-    flex:content;
-    text-align: center;
-    align-items: center;
-    margin:10px;
-    display: flex;
-    font-size: 13px;
-    color: gray;
-    font-weight: bolder;
-    cursor: pointer;
-    margin-bottom: 5px;
-    padding: 5px;
-  }
-  .col-sm:hover{
-    background-color: whitesmoke;
-    border-radius: 10px;
-    cursor: pointer;
-    color: black;
-  }
 
-  /*button*/
-  .btn-primary
-  {
-    margin: 10px;
-    border-radius: 10px;
-    
-    padding: 10px;
-    background-color: lightgreen;
-  }
-  .btn-primary:hover{
-    background-color: whitesmoke;
-    border-radius: 10px;
-    cursor: pointer;
-    color: black;
-  }
 
   .www{
-    flex-direction: row;
-    width: 20%;
+    /* height: 400px; */
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    /* width: 200px; */
   }
