@@ -279,7 +279,20 @@ def user_profile():
 
 @app.route('/profiles/')
 def profiles():
-    return render_template('profileSection.html')
+    respones = []
+    for user in User.query.all():
+        resp = {}
+        resp['cover_pic'] = user.cover_image_file
+        resp['profile_pic'] = user.cover_image_file
+        resp['username'] = user.username
+        resp['designation'] = user.designation
+        resp['github_id'] = user.github_id
+        resp['linkdedin_id'] = user.linkedin_id
+        resp['email'] = user.email
+        respones.append(resp)
+    return {"data":respones}
+
+
 
 
 
