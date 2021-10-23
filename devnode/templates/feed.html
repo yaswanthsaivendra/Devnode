@@ -8,49 +8,18 @@
   <!-- Google Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link rel="stylesheet" href="../static/css/feedstyles.css" />
+  
   <title>Devnode</title>
 </head>
 
 <body>
-  <!-- Header Starts -->
-  <div class="header">
-    <div class="header__left">
-      <h2>Devnode</h2>
-      <div class="header__search">
-        <i class="material-icons"> search </i>
-        <input type="text" />
-      </div>
-    </div>
-
-    <div class="header__right">
-      <div class="headerOption">
-        <i class="material-icons headerOption__icon"> home </i>
-        <h3>Home</h3>
-      </div>
-      <div class="headerOption">
-        <i class="material-icons headerOption__icon"> account_circle </i>
-        <h3>Me</h3>
-      </div>
-    </div>
-  </div>
+  
   <!-- Header Ends -->
 
   <!-- Main Body Starts -->
   <div class="body__main">
     <!-- Sidebar Starts -->
-    <div class="sidebar">
-      <div class="sidebar__top">
-        <img
-          src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxMjA3fDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080"
-          alt="" />
-        <i class="material-icons sidebar__topAvatar"> account_circle </i>
-        <h2>vivektangudu</h2>
-        <h4>xyzsd@gmail.com</h4>
-      </div>
-
-
-
-    </div>
+    
     <!-- Sidebar Ends -->
 
     <!-- Feed Starts -->
@@ -58,9 +27,46 @@
 
 
       <!-- Post Starts -->
-      <div class="post">
+      <div class="post hideContent">
         <div class="post__header">
-          <i class="material-icons sidebar__topAvatar"> account_circle </i>
+          <img
+          src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxMjA3fDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080"
+          alt="" />
+          <div class="post__info">
+            <h2>jtrjtfjk</h2>
+            <p>Job Description</p>
+            
+          </div>
+        </div>
+
+        <div class="post__body">
+          <p>seye </p>
+          
+        </div>
+
+      </div>
+      <div class="show-more">
+                  <div class="inputOption">
+              <i style="color: gray" class="material-icons"> Group </i>
+              <h4>Team Size:</h4>
+            </div>
+            <div class="inputOption">
+              <i style="color: gray" class="material-icons"> comment </i>
+              <h4>Date</h4>
+            </div>
+            <div class="inputOption">
+              <i style="color: gray" class="material-icons"> share </i>
+              <h4>Category</h4>
+            </div>
+            
+          
+        <a href="#">Show more</a>
+    </div>
+      <div class="post hideContent">
+        <div class="post__header">
+          <img
+          src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxMjA3fDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080"
+          alt="" />
           <div class="post__info">
             <h2>jtrjtfjk</h2>
             <p>Job Description</p>
@@ -68,11 +74,20 @@
         </div>
 
         <div class="post__body">
-          <p> </p>
+          <p>seyeDolor magna amet nulla sunt id velit exercitation proident laborum. Ea consequat laboris dolor ex esse duis minim consectetur pariatur consectetur aute id ullamco mollit. Deserunt cillum irure quis voluptate cillum dolore veniam enim adipisicing exercitation id irure est.
+
+Deserunt consectetur voluptate ad incididunt aliqua voluptate amet ipsum eu cupidatat sint laboris. Non voluptate excepteur nisi incididunt officia ad mollit quis aute voluptate. Ut ex do minim mollit ullamco excepteur ullamco tempor id est officia non. Commodo tempor ullamco aliqua commodo mollit qui in sit cillum in incididunt. Nostrud incididunt minim sint enim aliquip ea tempor cupidatat nostrud non. Aute deserunt fugiat dolor tempor anim.
+
+Cupidatat cillum esse consequat duis culpa aliqua. Sint exercitation et fugiat est sunt labore nulla consequat nisi irure incididunt. Non sunt exercitation id duis nisi. Incididunt ex labore culpa ea do nostrud. In eu et deserunt magna anim aute labore occaecat anim elit. Ullamco pariatur in nostrud Lorem tempor labore magna pariatur magna laborum enim amet aliquip dolore. Incididunt quis deserunt excepteur do aliquip culpa qui.
+
+Non aliqua voluptate eiusmod occaecat in. Anim commodo eiusmod id ullamco mollit quis dolore sunt cillum cupidatat deserunt et. Eiusmod velit laborum id laborum veniam sunt cillum non Lorem excepteur labore nisi. Exercitation occaecat reprehenderit occaecat commodo deserunt aliquip nisi irure incididunt irure. </p>
+        
         </div>
 
       </div>
-
+<div class="show-more">
+        <a href="#">Show more</a>
+    </div>
       <!-- Post Ends -->
 
     </div>
@@ -103,5 +118,21 @@
   </div>
   <!-- Main Body Ends -->
 </body>
+<script>
+$(".show-more a").on("click", function() {
+    var $this = $(this); 
+    var $content = $this.parent().prev("div.post");
+    var linkText = $this.text().toUpperCase();    
+    
+    if(linkText === "SHOW MORE"){
+        linkText = "Show less";
+        $content.switchClass("hideContent", "showContent", 400);
+    } else {
+        linkText = "Show more";
+        $content.switchClass("showContent", "hideContent", 400);
+    };
 
+    $this.text(linkText);
+});
+</script>
 </html>
