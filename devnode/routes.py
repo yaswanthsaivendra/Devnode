@@ -283,7 +283,7 @@ def profiles_api():
     for user in User.query.all():
         resp = {}
         resp['cover_pic'] = user.cover_image_file
-        resp['profile_pic'] = user.cover_image_file
+        resp['profile_pic'] = user.profile_image_file
         resp['username'] = user.username
         resp['designation'] = user.designation
         resp['github_id'] = user.github_id
@@ -306,3 +306,17 @@ def profiles():
 def public_profile(username):
     user = User.query.filter_by(username=username).first_or_404()
     return render_template('publicUserProfile.html', user=user)
+
+
+
+@app.route('/feed/new_post/', methods=['GET', 'POST'])
+@login_required
+def new_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title= form.title.data, content= form.content.data, author =current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created', 'success')
+        return redirect(url_for('main.home'))
+    return render_template('create_post.html', title= 'New Post', form=form,legend ="New Post")
