@@ -40,12 +40,13 @@
 <div class="wrapper">
     <div class="left">
         <div class="coverPic">
-            <i class="fas fa-camera"  data-bs-toggle="modal" data-bs-target="#coverPic"></i>
-            <img src="https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg" alt="" srcset="">
+            <i class="fas fa-camera" data-bs-toggle="modal" data-bs-target="#coverPic"></i>
+            <img src="{{ cover_image_file }}"
+                alt="" srcset="">
         </div>
         <div class="profilePicWrapper">
-            <div class="profilePic" data-bs-toggle="modal" data-bs-target="#profilePic" >
-                    <img src="https://thumbs.dreamstime.com/b/young-woman-avatar-cartoon-character-profile-picture-young-brunette-woman-short-hair-avatar-cartoon-character-vector-149728784.jpg"
+            <div class="profilePic" data-bs-toggle="modal" data-bs-target="#profilePic">
+                <img src="{{ profile_image_file }}"
                     alt="" srcset="">
             </div>
             <div class="nameBox">
@@ -74,7 +75,8 @@
                     <div class="skills">
                         <div class="skillsHeader">
                             <h4 class="m-2">Skills</h4>
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  class="btn btn-light">Add Skills</button>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                class="btn btn-light">Add Skills</button>
                         </div>
                         <div class="skillsBox my-3">
                             <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
@@ -91,7 +93,7 @@
 
                 <!-- Settings -->
                 <div class="settings">
-                    <form action="" method="post"  class="m-3 w-75" enctype="multipart/form-data">
+                    <form action="" method="post" class="m-3 w-75" enctype="multipart/form-data">
                         {{ form.hidden_tag() }}
 
                         <div class="form-group my-3">
@@ -153,7 +155,8 @@
                         <div class="form-group my-3">
                             {{ form.branch.label(class="my-1 mr-2 form-control-label") }}
                             {% if form.branch.errors %}
-                            {{ form.branch(class="custom-select my-1 mr-sm-2 form-control form-control-lg is-invalid") }}
+                            {{ form.branch(class="custom-select my-1 mr-sm-2 form-control form-control-lg is-invalid")
+                            }}
                             <div class="invalid-feedback">
                                 {% for error in form.branch.errors %}
                                 <span>{{ error }}</span>
@@ -257,16 +260,16 @@
             <h4>Contacts</h4>
             <hr>
             <div class="contactlinks">
-                <a href="mailto:{{current_user.email}}"  target="blank"><button class="btn btn-dark my-2 mail"><i
+                <a href="mailto:{{current_user.email}}" target="blank"><button class="btn btn-dark my-2 mail"><i
                             class="far fa-envelope"></i>Gmail</button></a>
-                <a href="https://discord.com/{{current_user.discord_id}}"  target="blank"><button class="btn btn-dark  my-2 discord"><i
-                            class="fab fa-discord"></i>Discord</button></a>
-                <a href="https://linkedin.com/in/{{current_user.linkedin_id}}"  target="blank"><button class="btn btn-dark  my-2 linkedin"><i
-                            class="fab fa-linkedin"></i>Linkedin</button></a>
-                <a href="https://twitter.com/{{current_user.twitter_id}}" target="blank"><button class="btn btn-dark  my-2 twitter"><i
-                            class="fab fa-twitter"></i>Twitter</button></a>
-                <a href="https://github.com/{{current_user.github_id}}" target="blank"><button class="btn btn-dark  my-2 github"><i
-                    class="fab fa-github"></i>Github</button></a>
+                <a href="https://discord.com/{{current_user.discord_id}}" target="blank"><button
+                        class="btn btn-dark  my-2 discord"><i class="fab fa-discord"></i>Discord</button></a>
+                <a href="https://linkedin.com/in/{{current_user.linkedin_id}}" target="blank"><button
+                        class="btn btn-dark  my-2 linkedin"><i class="fab fa-linkedin"></i>Linkedin</button></a>
+                <a href="https://twitter.com/{{current_user.twitter_id}}" target="blank"><button
+                        class="btn btn-dark  my-2 twitter"><i class="fab fa-twitter"></i>Twitter</button></a>
+                <a href="https://github.com/{{current_user.github_id}}" target="blank"><button
+                        class="btn btn-dark  my-2 github"><i class="fab fa-github"></i>Github</button></a>
             </div>
         </div>
     </div>
@@ -294,7 +297,7 @@
                     </form>
                     <div class="skillsBox my-3">
                         <span class="badge bg-dark px-3 py-2 m-2">SKILL</span>
-                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-trash" viewBox="0 0 16 16">
                             <path
                                 d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
@@ -321,77 +324,91 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="profilePicLabel">Upload Profile Picture</h5>
+                    <h5 class="modal-title" id="profilePicLabel">{{ profile_form.profile_picture.label() }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <form action="" method="post" , enctype="multipart/form-data">
+                        {{ profile_form.hidden_tag() }}
                     <p class="body-desc">
-                        It will be easier for your friends to recognize you if you upload your real photo. You can upload the image in JPG, GIF or PNG format. </p>
-                    <div class="photo-input"> <input type="file" id="loadFile" onchange="console.log(this.files[0].name);" /></div>
-                </div>
-                <div class="modal-footer">
-                    <p class="footer-title">
-                        If you're having problems uploading, try choosing a smaller photo.</p>
+                        It will be easier for your friends to recognize you if you upload your real photo. You can
+                        upload the image in JPG or PNG format. </p>
+
+                    <div class="photo-input">
+                        {{ profile_form.profile_picture(class="form-control-file", onchange="console.log(this.files[0].name);") }}
+                        {% if profile_form.profile_picture.errors %}
+                        {% for error in profile_form.profile_picture.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                        {{ profile_form.submit(class="btn btn-primary", value="Save") }}
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
-            </div>
+            </form>
         </div>
     </div>
-    <!-- modal for coverPic -->
-    <div class="modal fade" id="coverPic" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="coverPicLabel">Upload Cover Picture</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p class="body-desc">
-                   You can upload the image in JPG, GIF or PNG format. </p>
-                <div class="photo-input"> <input type="file"  onchange="console.log(this.files[0].name);" /></div>
-            </div>
-            <div class="modal-footer">
-                <p class="footer-title">
-                    If you're having problems uploading, try choosing a smaller photo.</p>
+
+
+
+        <!-- modal for coverPic -->
+        <div class="modal fade" id="coverPic" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="coverPicLabel">Update Cover Picture</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="post" id="idform" enctype="multipart/form-data" >
+                            {{ cover_form.hidden_tag() }}
+                        <p class="body-desc">
+                            You can upload the image in JPG or PNG format. </p>
+                        <div class="photo-input">
+                            {{ cover_form.cover_picture(class="form-control-file", onchange="console.log(this.files[0].name);") }}
+                            {% if cover_form.cover_picture.errors %}
+                            {% for error in cover_form.cover_picture.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="modal-footer">
+                            {{ cover_form.submit(class="btn btn-primary", value="Save", form="idform", type="submit") }}
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save</button>
-        </div>
-    </div>
-</div>
 
 </div>
 
 
 </body>
 <script>
-const detailsLink = document.getElementById("detailsLink");
-const activityLink = document.getElementById("activityLink");
-const settingsLink = document.getElementById("settingsLink");
-const details = document.querySelector(".details");
-const activity = document.querySelector(".activity");
-const settings = document.querySelector(".settings");
-detailsLink.addEventListener("click", () => {
-    details.style.display = "flex";
-    activity.style.display = "none";
-    settings.style.display = "none";
-})
-activityLink.addEventListener("click", () => {
-    details.style.display = "none";
-    activity.style.display = "flex";
-    settings.style.display = "none";
-});
-settingsLink.addEventListener("click", () => {
-    details.style.display = "none";
-    activity.style.display = "none";
-    settings.style.display = "flex";
-})
+    const detailsLink = document.getElementById("detailsLink");
+    const activityLink = document.getElementById("activityLink");
+    const settingsLink = document.getElementById("settingsLink");
+    const details = document.querySelector(".details");
+    const activity = document.querySelector(".activity");
+    const settings = document.querySelector(".settings");
+    detailsLink.addEventListener("click", () => {
+        details.style.display = "flex";
+        activity.style.display = "none";
+        settings.style.display = "none";
+    })
+    activityLink.addEventListener("click", () => {
+        details.style.display = "none";
+        activity.style.display = "flex";
+        settings.style.display = "none";
+    });
+    settingsLink.addEventListener("click", () => {
+        details.style.display = "none";
+        activity.style.display = "none";
+        settings.style.display = "flex";
+    })
 </script>
 {% endblock content %}
-

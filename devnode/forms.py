@@ -1,9 +1,10 @@
 from flask_wtf import FlaskForm
 from wtforms.fields.core import SelectField, StringField
-from wtforms.fields.simple import PasswordField, SubmitField, TextAreaField
+from wtforms.fields.simple import FileField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationError
 from devnode.models import User
 from flask_login import current_user
+from flask_wtf.file import FileField, FileAllowed
 
 
 
@@ -71,3 +72,13 @@ class UpdateAccountForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('The email is already registered')
+
+
+class UpdateProfilePicture(FlaskForm):
+    profile_picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Save')
+
+
+class UpdateCoverPicture(FlaskForm):
+    cover_picture = FileField('Update Cover Picture', validators=[FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Save')
