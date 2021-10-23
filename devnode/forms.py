@@ -1,4 +1,3 @@
-from flask.app import Flask
 from flask_wtf import FlaskForm
 from wtforms.fields.core import SelectField, StringField
 from wtforms.fields.simple import FileField, PasswordField, SubmitField, TextAreaField
@@ -6,6 +5,7 @@ from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationE
 from devnode.models import User
 from flask_login import current_user
 from flask_wtf.file import FileField, FileAllowed
+from wtforms.fields.html5 import DateField
 
 
 
@@ -94,5 +94,5 @@ class PostForm(FlaskForm):
     content = TextAreaField('Content', validators=[DataRequired()])
     category = SelectField('Category', validators=[DataRequired()], choices= ['Hackathon', "Competetive Coding Contest", 'Opensource Project', 'other'])
     persons_required = SelectField('Number of Persons Required', validators=[DataRequired()], choices=[1,2,3,4,5,6,7,8])
-    last_date = StringField('Last date', validators=[DataRequired()])
+    last_date = DateField('Last date', validators=[DataRequired()], format="%Y-%m-%d")
     submit = SubmitField('Post')

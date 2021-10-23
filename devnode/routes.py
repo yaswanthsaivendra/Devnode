@@ -231,9 +231,14 @@ def user_profile():
     add_skill_form = AddSkill()
     if add_skill_form.validate_on_submit():
         new_skill_name = add_skill_form.skill_name.data
-        if new_skill_name not in list(map(lambda s: s.name, current_user.skills)):
-            current_user.skills.append(Skill(name=new_skill_name))
-            db.session.commit()
+        present_skill=Skill.query.filter_by(name=new_skill_name).first()
+        if present_skill:
+            present_skill.users_associated.append(current_user)
+        else:
+            new_skill=Skill(name=new_skill_name)
+            new_skill.users_associated.append(current_user)
+            db.session.add(new_skill)
+        db.session.commit()
 
     form = UpdateAccountForm()
     if form.validate_on_submit():
@@ -286,10 +291,11 @@ def user_profile():
     cover_image_file = url_for('static', filename= 'cover_pics/' + current_user.cover_image_file )
     return render_template('userProfile.html', title='Account', form=form, profile_form=profile_form, cover_form=cover_form, profile_image_file=profile_image_file, cover_image_file=cover_image_file, add_skill_form=add_skill_form, user_skills=user_skills)
 
-@app.route('/removeSkill')
+@app.route('/removeSkill/')
 def remove_skill():
-    skill_to_delete = request.args['skill_name']
-    current_user.skills = list(filter(lambda s: s.name != skill_to_delete, current_user.skills))
+    skill_to_delete = request.args.get('skill_name')
+    skill = Skill.query.filter_by(name=skill_to_delete).first()
+    skill.users_associated.remove(current_user)
     db.session.commit()
     return redirect('/userProfile')
 
