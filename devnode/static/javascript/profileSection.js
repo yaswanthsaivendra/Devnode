@@ -16,7 +16,7 @@ function userCard(user) {
     <div class="profile-card">
     <div class="profile-image" style="background-image:url(${user.cover_pic})"><img src="${user.profile_pic}" alt="${user.username}" width=200/></div>
     <figcaption>
-      <h3>${user.username}</h3>
+    <a href="http://127.0.0.1:5000/profiles/${user.username}"> <h3>${user.username}</h3></a>
       <h5>${user.designation}</h5>
     
       <div class="icons">
