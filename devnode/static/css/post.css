@@ -110,4 +110,8 @@ justify-content: flex-end;
 }
 .makepost{
   background-color: #4A5150 !important;
+  margin-top: 100px;
+}
+.category a{
+  width: 100%;
 }
