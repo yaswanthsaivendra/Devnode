@@ -14,28 +14,29 @@
 </head>
 
 <body>
-    <div id="nav">
-        <nav>
-            <div class="logo">
-                <a href="{{ url_for('index') }}"><h3 class="logoName">Devnode</h3></a>
-            </div>
-            <i class="fa fa-bars" id="open"></i>
-            <div class="menu" id="menuList">
-                <i class="fa fa-times" id="close"></i>
-                <ul>
-                    <li><a href="{{ url_for('feed')}}">Feed</a></li>
-                    <li><a href="{{ url_for('profiles') }}">Profiles</a></li>
-                    {% if current_user.is_authenticated %}
-                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
-                    <li><a href="{{url_for('user_profile')}}"><i class="fas fa-user" id="user"></i></a></li>
-                    {% else %}
-                    <li><a href="{{ url_for('login') }}">Login</a></li>
-                    <a href="{{ url_for('signup') }}" class="btn btn-outline-light signupTop">Signup</a>
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
-    </div>
+   <div id="nav">
+    <nav>
+        <div class="logo">
+            <a href="{{ url_for('index') }}"><h3 class="logoName">Devnode</h3></a>
+        </div>
+        <i class="fa fa-bars" id="open"></i>
+        <div class="menu" id="menuList">
+            <i class="fa fa-times" id="close"></i>
+            <ul>
+                <li><a href="{{ url_for('feed')}}">Feed</a></li>
+                <li><a href="{{ url_for('profiles') }}">Profiles</a></li>
+                {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                <li><a href="{{url_for('user_profile')}}"><i class="fas fa-user" id="user"></i></a></li>
+                {% else %}
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <a href="{{ url_for('signup') }}" class="btn btn-outline-light signupTop">Signup</a>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+   </div>
+        
 
 
 <div class="wrapper">
@@ -67,25 +68,26 @@
 
 
     </div>
+    <div class="category right">
+        <div class="postbtn my-2 w-100">
+        <a href="{{url_for('new_post')}}">
+            <button class="btn btn-dark w-100 makepost">Make a Post</button>
+        </a>
+        </div>
+        <div class="category">
+            <h2 class="text-center p-2">Category</h2>
+            <a href="{{url_for('feed')}}"><button class="btn btn-outline-dark w-100 my-1">Hackathon </button></a>
+            <a href="{{url_for('feed_comp')}}"><button class="btn btn-outline-dark w-100 my-1">Competative Coding </button></a>
+            <a href="{{url_for('feed_opensource')}}"><button class="btn btn-outline-dark w-100 my-1">Open Source</button></a>
+            <a href="{{url_for('feed_other')}}"><button class="btn btn-outline-dark w-100 my-1">Others</button></a>
+        </div>
+    </div>
 </div>
 
 
 
 
-        <div class="category right">
-            <div class="postbtn my-2 w-100">
-            <a href="{{url_for('new_post')}}">
-                <button class="btn btn-dark w-100 makepost">Make a Post</button>
-            </a>
-            </div>
-            <div class="category">
-                <h2 class="text-center p-2">Category</h2>
-                <a href="{{url_for('feed')}}"><button class="btn btn-outline-dark w-100 my-1">Hackathon </button></a>
-                <a href="{{url_for('feed_comp')}}"><button class="btn btn-outline-dark w-100 my-1">Competative Coding </button></a>
-                <a href="{{url_for('feed_opensource')}}"><button class="btn btn-outline-dark w-100 my-1">Open Source</button></a>
-                <a href="{{url_for('feed_other')}}"><button class="btn btn-outline-dark w-100 my-1">Others</button></a>
-            </div>
-        </div>
+       
 
 
 
