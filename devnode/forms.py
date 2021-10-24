@@ -74,6 +74,30 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError('The email is already registered')
 
+    def validate_twitter(self, twitter_id):
+        if twitter_id.data != current_user.twitter_id:
+            user = User.query.filter_by(twitter_id=twitter_id.data).first()
+            if user:
+                raise ValidationError('The twitter id is already linked with some account')
+
+    def validate_github(self, github_id):
+        if github_id.data != current_user.github_id:
+            user = User.query.filter_by(github_id=github_id.data).first()
+            if user:
+                raise ValidationError('The github id is already linked with some account')
+
+    def validate_linkedin(self, linkedin_id):
+        if linkedin_id.data != current_user.linkedin_id:
+            user = User.query.filter_by(linkedin_id=linkedin_id.data).first()
+            if user:
+                raise ValidationError('The linkedin id is already linked with some account')
+
+    def validate_discord(self, discord_id):
+        if discord_id.data != current_user.discord_id:
+            user = User.query.filter_by(discord_id=discord_id.data).first()
+            if user:
+                raise ValidationError('The discord id is already linked with some account')
+
 
 class UpdateProfilePicture(FlaskForm):
     profile_picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
@@ -94,5 +118,5 @@ class PostForm(FlaskForm):
     content = TextAreaField('Content', validators=[DataRequired()])
     category = SelectField('Category', validators=[DataRequired()], choices= ['Hackathon', "Competetive Coding Contest", 'Opensource Project', 'other'])
     persons_required = SelectField('Number of Persons Required', validators=[DataRequired()], choices=[1,2,3,4,5,6,7,8])
-    last_date = DateField('Last date', validators=[DataRequired()], format="%Y-%m-%d")
+    last_date = DateField('Last date', validators=[DataRequired()], format="%Y-%d-%m")
     submit = SubmitField('Post')

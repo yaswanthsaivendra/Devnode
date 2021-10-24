@@ -1,11 +1,10 @@
-from flask import render_template, url_for, redirect, request
+from flask import render_template, url_for, redirect, request, abort
 from flask.helpers import flash
 from flask_login.utils import login_user, logout_user
 from devnode import app, bcrypt, db
 from devnode.forms import AddSkill, LoginForm, RequestResetForm, ResetPasswordForm, SignupForm, UpdateAccountForm, UpdateCoverPicture, UpdateProfilePicture, PostForm
 from flask_login import current_user, login_user, login_required
 from devnode.models import Post, Skill, User
-# from flask_mail import Message
 from trycourier import Courier
 import os
 import secrets
@@ -85,16 +84,6 @@ def confirm_email(token):
 
 def send_confirmation_email(user):
     token = user.get_token()
-    # msg = Message('Confirm Your Email',
-    #  sender='noreply@demo.com', recipients=[user.email])
-
-    # msg.body = f'''To Confirm Your account, visit the following link:
-    # {url_for('confirm_email', token=token, _external=True)}
-
-    # If you did not make this request then simply ignore this email.
-    # '''
-    # mail.send(msg)
-
     client.send(
     event="66ZVXFNNSKM3DCKMRNKT9E61ERB6",
     recipient="1ce9bc75-6700-4417-b939-4eb150c2fbc1",
@@ -173,17 +162,6 @@ def reset_token(token):
 
 def send_reset_email(user):
     token = user.get_token()
-    # msg = Message('Password Reset Request',
-    #  sender='noreply@demo.com', recipients=[user.email])
-
-    # msg.body = f'''To reset your password, visit the following link:
-    # {url_for('reset_token', token=token, _external=True)}
-
-    # If you did not make this request then simply ignore this email.
-    # '''
-    # mail.send(msg)
-
-
     client.send(
     event="78PBTX41D646JGKZ8MTCM6PXQSVY",
     recipient="7179bf35-4578-4730-9660-bd3b77dd4a35",
@@ -313,10 +291,6 @@ def profiles_api():
         resp['github_id'] = user.github_id
         resp['linkdedin_id'] = user.linkedin_id
         resp['email'] = user.email
-        skills = []
-        for skill in user.skills:
-            skills.append(skill)
-        resp['skills'] = skills
         respones.append(resp)
     return {"data":respones}
 
@@ -338,7 +312,26 @@ def public_profile(username):
 
 @app.route('/feed/')
 def feed():
-    return render_template('feed.html')
+     posts = Post.query.filter_by(category='Hackathon').order_by(Post.date_posted.desc())
+     return render_template('posts.html', posts=posts)
+
+
+@app.route('/feed/competetive_coding/')
+def feed_comp():
+     posts = Post.query.filter_by(category='Competetive Coding Contest').order_by(Post.date_posted.desc())
+     return render_template('posts.html', posts=posts)
+
+
+@app.route('/feed/opensource/')
+def feed_opensource():
+     posts = Post.query.filter_by(category='Opensource Project').order_by(Post.date_posted.desc())
+     return render_template('posts.html', posts=posts)
+
+
+@app.route('/feed/other/')
+def feed_other():
+     posts = Post.query.filter_by(category='other').order_by(Post.date_posted.desc())
+     return render_template('posts.html', posts=posts)
 
 
 
@@ -347,9 +340,47 @@ def feed():
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(title= form.title.data, content= form.content.data, persons_required = form.persons_required.data, category=form.category.data, last_date=form.last_date.data, author =current_user)
+        post = Post(title= form.title.data, content= form.content.data, persons_required = form.persons_required.data, last_date=form.last_date.data, category=form.category.data, author =current_user)
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created', 'success')
         return redirect(url_for('feed'))
     return render_template('create_post.html', title= 'New Post', form=form)
+
+
+
+@app.route('/feed/<int:post_id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.content = form.content.data
+        post.persons_required = form.persons_required.data
+        post.category=form.category.data
+        post.last_date=form.last_date.data
+        db.session.commit()
+        flash("Your post has been updated!", 'success')
+        return redirect(url_for('feed', post_id=post.id))
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.content.data = post.content
+        form.persons_required.data = post.persons_required
+        form.category.data = post.category
+        form.last_date.data = post.last_date
+    return render_template('edit_post.html', title= 'Edit Post', form=form, post=post)
+
+@app.route('/post/<int:post_id>/delete', methods=['POST'])
+@login_required
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash('Your post has been deleted', 'success')
+    return redirect(url_for('feed'))
+

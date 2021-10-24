@@ -14,7 +14,9 @@
 <div class="containerMain">
     <div class="headingBox">
         <h1 class="mainHeading">Find Developers and Collaborate!</h1>
+        {% if not current_user.is_authenticated %}
         <a href="{{ url_for('signup') }}" class="btn btn-light shinybtn">Sign up</a>
+        {% endif %}
     </div>
     <div class="imgBox">
         <img src="{{ url_for('static', filename= 'assets/illustration.jpg') }}" class="ilimg img-fluid"

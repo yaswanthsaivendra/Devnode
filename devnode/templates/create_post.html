@@ -10,19 +10,20 @@
 <link rel="stylesheet" href="{{ url_for('static', filename= 'css/createpost.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename= 'css/nav.css') }}">
 
+
 {% endblock css %}
 
 {% block navigation %}
 <div id="nav">
     <nav>
         <div class="logo">
-            <h3 class="logoName">Devnode</h3>
+            <a href="{{url_for('index')}}"><h3 class="logoName">Devnode</h3></a>
         </div>
         <i class="fa fa-bars" id="open"></i>
         <div class="menu" id="menuList">
             <i class="fa fa-times" id="close"></i>
             <ul>
-                <li><a href="#">Feed</a></li>
+                <li><a href="{{ url_for('feed') }}">Feed</a></li>
                 <li><a href="{{ url_for('profiles') }}">Profiles</a></li>
                 {% if current_user.is_authenticated %}
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
@@ -43,7 +44,7 @@
     <h2 class="page-title text-center">Create post</h2>
     <div class="w-75 p-3 mx-auto">
         <div class="shadow p-3 mb-5 bg-white rounded box">
-            <form action="" method="post" class="row g-3">
+            <form action="" method="post" class="row g-3" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
                 <div class="mb-3">
                     <label>Title</label>
@@ -51,7 +52,7 @@
                 </div>
                 <div class="mb-3">
                     <label>Body</label>
-                    {{ form.content(class="form-control" , autocomplete="off", id="body") }}
+                    {{ form.content(class="form-control" , autocomplete="off", id='body') }}
                 </div>
                 <div class="row g-3">
                     <div class="col-sm">
@@ -61,11 +62,11 @@
                     </div>
                     <div class="col-sm">
                         <label>Number of Persons Required</label>
-                        {{ form.persons_required(id="body") }}
+                        {{ form.persons_required() }}
                     </div>
                     <div class="col-sm">
                         <label for="datemin">Enter Date of contest</label>
-                        {{ form.last_date(type="date" , id="datemin") }}
+                        {{ form.last_date() }}
                         <br><br>
                     </div>
                 </div>

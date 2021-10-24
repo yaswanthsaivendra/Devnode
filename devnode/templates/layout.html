@@ -1,5 +1,3 @@
- <!-- layout.html is like layout of our html pages, it will be applicable to all mulitple html pages. So that we wont repeat the some html code again nd again. -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,15 +45,16 @@
     <header>
         <nav>
             <div class="logo">
+                <a href="{{url_for('index')}}">
                 <h3 class="logoName">Devnode</h3>
-                <!-- <img src="{{ url_for('static', filename='assets/Devnode.png') }}" alt="" class="logoImg"> -->
+                </a>
 
             </div>
             <i class="fa fa-bars" id="open"></i>
             <div class="menu" id="menuList">
                 <i class="fa fa-times" id="close"></i>
                 <ul>
-                    <li><a href="#">Feed</a></li>
+                    <li><a href="{{url_for('feed')}}">Feed</a></li>
                     <li><a href="{{url_for('profiles')}}">Profiles</a></li>
                     {% if current_user.is_authenticated %}
                     <li><a href="{{ url_for('logout') }}">Logout</a></li>
@@ -102,12 +101,12 @@
     <footer class="footer-distributed">
 		<div class="footer-left">
 			<span>
-				<h1 style="color:  #ffffff;">Devnode</h1>
+				<h1 style="color:#ffffff;">Devnode</h1>
 			</span>
 			<p class="footer-links">
-				<a href="#">Home</a>
+				<a href="{{url_for('index')}}">Home</a>
 				·
-				<a href="#">Feed</a>
+				<a href="{{url_for('feed')}}">Feed</a>
 				·
 				<a href="#">About</a>
 				·
