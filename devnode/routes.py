@@ -314,25 +314,25 @@ def public_profile(username):
 
 @app.route('/feed/')
 def feed():
-     posts = Post.query.filter_by(category='Hackathon').order_by(Post.date_posted.desc())
+     posts = Post.query.filter_by(category='Hackathon').all()
      return render_template('posts.html', posts=posts)
 
 
 @app.route('/feed/competetive_coding/')
 def feed_comp():
-     posts = Post.query.filter_by(category='Competetive Coding Contest').order_by(Post.date_posted.desc())
+     posts = Post.query.filter_by(category='Competetive Coding Contest').all()
      return render_template('posts.html', posts=posts)
 
 
 @app.route('/feed/opensource/')
 def feed_opensource():
-     posts = Post.query.filter_by(category='Opensource Project').order_by(Post.date_posted.desc())
+     posts = Post.query.filter_by(category='Opensource Project').all()
      return render_template('posts.html', posts=posts)
 
 
 @app.route('/feed/other/')
 def feed_other():
-     posts = Post.query.filter_by(category='other').order_by(Post.date_posted.desc())
+     posts = Post.query.filter_by(category='other').all()
      return render_template('posts.html', posts=posts)
 
 

@@ -40,7 +40,7 @@
 
 <div class="wrapper">
     <div class="postsection m-2">
-    {% for post in posts.items %}
+    {% for post in posts %}
 
         <div class="post">
             <h1 class="pt-4">{{ post.title }}</h1>
@@ -55,7 +55,7 @@
             <span class="badge badge-dark  py-2 m-2">Event Date : {{ post.last_date }}</span>
             <div class="postdetails p-2">
                 <div class="usernameDate p-1">
-                    <a href="{{url_for('public_profile')}}">{{ post.author.username }}</a>
+                    <a href="{{url_for('public_profile', username=post.author.username )}}">{{ post.author.username }}</a>
                     <small>posted on {{post.date_posted.strftime('%Y-%m-%d')}}</small>
                 </div>
                <div class="profilePic">
