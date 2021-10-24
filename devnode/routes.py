@@ -307,7 +307,9 @@ def profiles():
 @app.route('/profiles/<string:username>/')
 def public_profile(username):
     user = User.query.filter_by(username=username).first_or_404()
-    return render_template('publicUserProfile.html', user=user)
+    profile_image_file = url_for('static', filename= 'profile_pics/' + user.profile_image_file )
+    cover_image_file = url_for('static', filename= 'cover_pics/' + user.cover_image_file )
+    return render_template('publicUserProfile.html', user=user, profile_image_file=profile_image_file, cover_image_file=cover_image_file)
 
 
 @app.route('/feed/')
@@ -340,7 +342,7 @@ def feed_other():
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(title= form.title.data, content= form.content.data, persons_required = form.persons_required.data, last_date=form.last_date.data, category=form.category.data, author =current_user)
+        post = Post(title= form.title.data, content= form.body.data, persons_required = form.persons_required.data, last_date=form.last_date.data, category=form.category.data, author =current_user)
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created', 'success')
@@ -358,7 +360,7 @@ def edit_post(post_id):
     form = PostForm()
     if form.validate_on_submit():
         post.title = form.title.data
-        post.content = form.content.data
+        post.content = form.body.data
         post.persons_required = form.persons_required.data
         post.category=form.category.data
         post.last_date=form.last_date.data
@@ -367,7 +369,7 @@ def edit_post(post_id):
         return redirect(url_for('feed', post_id=post.id))
     elif request.method == 'GET':
         form.title.data = post.title
-        form.content.data = post.content
+        form.body.data = post.content
         form.persons_required.data = post.persons_required
         form.category.data = post.category
         form.last_date.data = post.last_date
